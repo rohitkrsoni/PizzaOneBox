@@ -9,23 +9,26 @@ namespace PizzaOneBox.Controllers
 {
     public class SelectedPizzaController : Controller
     {
-        public IPizzaRepository PizzaRepository;
+        private readonly IPizzaRepository _pizzaRepository;
         public SelectedPizzaController(IPizzaRepository pizzaRepository)
         {
-            this.PizzaRepository = pizzaRepository;
+            this._pizzaRepository = pizzaRepository;
         }
         [HttpGet]
         public IActionResult SelectedPizza(int id)
         {
-            PizzaModel CurrentPizza = PizzaRepository.GetPizza(id);
-            return View(CurrentPizza);
+            Pizza currentPizza = _pizzaRepository.GetPizza(id);
+            ViewBag.ActivateOrderButton = false;
+            return View(currentPizza);
         }
         [HttpPost]
-        public IActionResult SelectedPizza(PizzaModel pizza)
+        public IActionResult SelectedPizza(Pizza pizza)
         {
-            if (ModelState.IsValid == false) return View(pizza);
-            pizza.Cost = PizzaRepository.GetPizzaCost(pizza);
+            if (!ModelState.IsValid) return View(pizza);
+            ViewBag.ActivateOrderButton = true;
+            pizza.Cost = _pizzaRepository.GetPizzaCost(pizza);
             return View(pizza);
         }
+        
     }
 }

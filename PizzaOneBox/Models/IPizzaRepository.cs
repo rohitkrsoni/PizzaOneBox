@@ -7,8 +7,8 @@ namespace PizzaOneBox.Models
 {
     public interface IPizzaRepository
     {
-        PizzaModel GetPizza(int id);
-        float GetPizzaCost(PizzaModel pizza);
+        Pizza GetPizza(int id);
+        decimal GetPizzaCost(Pizza pizza);
 
        
     }
