@@ -1,0 +1,18 @@
+﻿@model PizzaOneBox.Models.Pizza
+@{
+    Layout = "_Layout";
+}
+
+<div class="container">
+    <div class="row py-5">
+        <div class=" col-md-5">
+            <img src=@Model.ImagePath width="80%" height="225"/>
+
+        </div>
+        <div class="col-md-5">
+            <h2> @Model.PizzaName</h2>
+            <p>@Model.PizzaToppings</p>
+            <p>@Model.PizzaPrice</p>
+        </div>
+    </div>
+</div>

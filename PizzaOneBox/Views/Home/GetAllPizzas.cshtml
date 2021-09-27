@@ -1,0 +1,40 @@
+﻿@model IEnumerable<PizzaOneBox.Models.Pizza>
+
+
+@{
+    Layout = "_Layout";
+}
+<!DOCTYPE html>
+<html>
+<body>
+    <div class="container-fluid">
+        <img class="img-fluid" src="~/Pizza_images/banner.jpg" width="1500" height="80" alt="banner" />
+    </div>
+    <br />
+    <br />
+    <div class="container">
+        <div class="row py-5">
+            @foreach (var pizza in Model)
+            {
+                <div class=" col-md-4">
+                    <div class="card mb-4">
+                        <img src=@pizza.ImagePath width="100%" height="225" class=" card-img-top" />
+                        <div class="card-body">
+                            <h4 class=" card-title">@pizza.PizzaName</h4>
+                            <p class="card-text">@pizza.PizzaToppings</p>
+                            <hr />
+                            <div class="d-flex justify-content-between align-items-center ">
+                                <p>@pizza.PizzaPrice</p>
+                               <a href="/home/getpizza/@pizza.Id" class="btn btn-primary"> Select </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            }
+
+        </div>
+     </div>
+
+</body>
+</html>
