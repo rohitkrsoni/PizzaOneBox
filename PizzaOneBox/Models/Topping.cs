@@ -11,18 +11,5 @@ namespace PizzaOneBox.Models
         public string Name { get; set; }
         public decimal Price { get; set; }
         public bool CheckBoxAnswer { get; set; }
-
-        public Topping()
-        {
-
-        }
-
-        public Topping(int id,string topping,decimal price,bool checkBoxAnswer=false)
-        {
-            this.Id = id;
-            this.Name = topping;
-            this.Price = price;
-            this.CheckBoxAnswer = checkBoxAnswer;
-        }
     }
 }

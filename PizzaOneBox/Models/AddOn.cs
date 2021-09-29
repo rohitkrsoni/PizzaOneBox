@@ -10,6 +10,7 @@ namespace PizzaOneBox.Models
         public int Id { get; set; }
         public string AddOnName { get; set; }
         public decimal AddOnPrice { get; set; }
-        public bool selected { get; set; }
+        public bool Selected { get; set; }
+
     }
 }

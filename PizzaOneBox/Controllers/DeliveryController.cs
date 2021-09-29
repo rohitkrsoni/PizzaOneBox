@@ -9,8 +9,8 @@ namespace PizzaOneBox.Controllers
 {
     public class DeliveryController : Controller
     {
-        public String Index(Pizza pizza)
-        {
+        public string Index(Pizza pizza)
+        {            
             return pizza.PizzaName;
         }
     }

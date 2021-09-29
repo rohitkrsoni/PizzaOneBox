@@ -5,13 +5,10 @@ using System.Threading.Tasks;
 
 namespace PizzaOneBox.Models
 {
-    public enum PizzaBase
+    public class PizzaBase
     {
-        HandTossed,	
-        CheeseBurst,
-        WheatThinCrust,
-        FreshPanPizza,
-        Italian
-
+        public int BaseId { get; set; }
+        public string BaseName { get; set; }
+        public decimal BasePrice { get; set; }
     }
 }

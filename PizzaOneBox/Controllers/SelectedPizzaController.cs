@@ -12,7 +12,7 @@ namespace PizzaOneBox.Controllers
         private readonly IPizzaRepository _pizzaRepository;
         public SelectedPizzaController(IPizzaRepository pizzaRepository)
         {
-            this._pizzaRepository = pizzaRepository;
+            _pizzaRepository = pizzaRepository;
         }
         [HttpGet]
         public IActionResult SelectedPizza(int id)
@@ -26,7 +26,8 @@ namespace PizzaOneBox.Controllers
         {
             if (!ModelState.IsValid) return View(pizza);
             ViewBag.ActivateOrderButton = true;
-            pizza.Cost = _pizzaRepository.GetPizzaCost(pizza);
+
+            pizza.TotalCost = _pizzaRepository.GetPizzaCost(pizza);
             return View(pizza);
         }
         
