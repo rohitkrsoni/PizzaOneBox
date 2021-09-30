@@ -17,7 +17,7 @@ namespace PizzaOneBox.Models
         public int CurrentBase { get; set; }
         public IList<PizzaBase> PizzaBase { get; set; }
         [ToppingsValidator(ErrorMessage = "Please select at least 1 Topping(s)")]
-        public IList<Topping> Toppings { get; set; }
+        public List<Topping> Toppings { get; set; }
         public IList<AddOn> AddOns { get; set; }
         public string Description { get; set; }
         public string PhotoPath { get; set; }
