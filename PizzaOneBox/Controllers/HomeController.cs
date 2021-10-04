@@ -11,25 +11,19 @@ namespace PizzaOneBox.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly PizzaRepository _pizzaRepository = null;
+        private readonly IPizzaRepository _pizzaRepository ;
 
-        public HomeController()
+        public HomeController(IPizzaRepository pizzaRepository)
         {
-            _pizzaRepository = new PizzaRepository();
+            _pizzaRepository = pizzaRepository;
         }
         public ActionResult HomePage()
-        {
-            return View();
-        }
-
-        public ViewResult GetAllPizzas()
         {
             var data = _pizzaRepository.GetAllPizzas();
 
             return View(data);
-
         }
-
+               
         public ViewResult GetPizza(int id)
         {
             var pizzaDetails = _pizzaRepository.GetPizza(id);

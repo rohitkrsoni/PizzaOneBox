@@ -11,7 +11,7 @@ namespace PizzaOneBox.Models
 
         public string PizzaName { get; set; }
         public string ImagePath { get; set; }
-        public float PizzaPrice { get; set; }
+        public decimal PizzaPrice { get; set; }
 
         public string PizzaToppings { get; set; }
     }
