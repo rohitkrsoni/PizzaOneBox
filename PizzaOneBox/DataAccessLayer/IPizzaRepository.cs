@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using PizzaOneBox.Models;
 
-namespace PizzaOneBox.Models
+namespace PizzaOneBox.DataAccessLayer
 {
     public interface IPizzaRepository
     {
