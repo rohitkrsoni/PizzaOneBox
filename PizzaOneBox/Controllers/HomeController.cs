@@ -4,7 +4,7 @@ using System.Collections.Generic;
 namespace PizzaOneBox.Controllers
 {
     public class HomeController : Controller
-    {
+   {
         [HttpGet]
         public ActionResult HomePage()
         {
@@ -20,7 +20,8 @@ namespace PizzaOneBox.Controllers
             };
             return View(pizzaList);
         }
-             
-        
+                 
+       
+
     }
 }
