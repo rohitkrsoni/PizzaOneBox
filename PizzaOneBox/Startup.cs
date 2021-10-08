@@ -20,7 +20,6 @@ namespace PizzaOneBox
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
-            services.AddScoped<IPizzaRepository, PizzaRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -44,7 +43,7 @@ namespace PizzaOneBox
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                    pattern: "{controller=Home}/{action=HomePage}/{id?}");
             });
         }
     }
