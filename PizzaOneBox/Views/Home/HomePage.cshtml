@@ -1,4 +1,4 @@
-﻿@model IEnumerable<PizzaOneBox.Models.Pizza>
+﻿@model IEnumerable<PizzaOneBox.Models.HomePagePizzaModel>
 
 
 @{
@@ -18,13 +18,13 @@
             {
                 <div class=" col-md-4" >
                     <div class="card mb-4 " style=" height:95%; " align-self="normal">
-                        <img src=@pizza.ImagePath style= "width:100%; height:100%" class=" card-img-top" />
+                        <img src=@pizza.PhotoPath style= "width:100%; height:100%" class=" card-img-top" />
                         <div class="card-body">
                             <h4 class="card-title">@pizza.PizzaName</h4>
-                            <p class="card-text" >@pizza.PizzaToppings </p> 
+                            <p class="card-text" >@pizza.PizzaDescription </p> 
                             <hr />
                             <div class="d-flex justify-content-between align-items-center ">
-                                <p style="margin-bottom:3% ;">£@pizza.PizzaPrice </p> 
+                                <p style="margin-bottom:3% ;">£@pizza.PizzaCost </p> 
                                 <a href="/SelectedPizza/SelectedPizza/@pizza.Id" class="btn btn-primary"> Select </a>
                             </div>
                         </div>
