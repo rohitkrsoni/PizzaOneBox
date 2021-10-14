@@ -1,8 +1,8 @@
 ﻿@model Pizza;
 @using Microsoft.AspNetCore.Http;
-<div class="container bg-light " style="margin:20px;">
+<div style="margin: 10%; width: 80%;    height: 40%;    border: 3px solid #73AD21;  align-content:center;
+     padding: 10px;    border-radius: 10px;    text-align: center;    background-color: azure;">
     <div style="margin:20px;">
-        <a class="btn btn-primary" asp-action="HomePage" asp-controller="Home">Back</a>
         <form class="pizzaTitle" id="SelectedPizzaForm" asp-controller="SelectedPizza" asp-action="SelectedPizza" method="post">
             <div class="center">
 
@@ -10,7 +10,8 @@
                     <div class="col-sm-3"><img class=" img" asp-append-version="true" src="@Model.PhotoPath" /></div>
                     <div class="col-sm-9">
                         <h3 class="col-sm-3 h3 pizzaTitle">@Model.PizzaName</h3>
-                        <p class="h5 col-sm-10">@Model.Description</p>
+                                   <p class="h5 col-sm-10">@Model.Description</p>
+                        
                     </div>
                     <input type="hidden" asp-for="PizzaId" value="@Model.PizzaId" />
                     <input type="hidden" asp-for="PizzaName" value="@Model.PizzaName">
@@ -56,37 +57,73 @@
                 <div class="form-group row">
                     <label asp-for="Toppings" class="col-sm-2 align-middle col-form-label"></label>
                     <div class="col-sm-10">
-                        @for (int i = 0; i < Model.Toppings.Count; i++)
-                        {
+                        <table>
 
-                            <input class="mr-2 " type="checkbox" asp-for="Toppings[i].CheckBoxAnswer" onchange="document.getElementById('SelectedPizzaForm').submit()">
-                            <label class="col-sm-2 align-text-top " asp-for="Toppings[i].Name">@Model.Toppings[i].Name</label>
-                            <input type="hidden" asp-for="Toppings[i].Id" value="@Model.Toppings[i].Id">
-                            <input type="hidden" asp-for="Toppings[i].Name" value="@Model.Toppings[i].Name">
-                            <input type="hidden" asp-for="Toppings[i].Price" value="@Model.Toppings[i].Price">
-                        }
+                            @for (int i = 0; i < Model.Toppings.Count; i += 2)
+                            {
+                                <tr>
+                                    <td>
+                                        <input class="mr-2 " type="checkbox" asp-for="Toppings[i].CheckBoxAnswer"
+                                               onchange="document.getElementById('SelectedPizzaForm').submit()">
+                                        <label class="col-sm-2 align-text-top " asp-for="Toppings[i].Name">@Model.Toppings[i].Name</label>
+                                        <input type="hidden" asp-for="Toppings[i].Id" value="@Model.Toppings[i].Id">
+                                        <input type="hidden" asp-for="Toppings[i].Name" value="@Model.Toppings[i].Name">
+                                        <input type="hidden" asp-for="Toppings[i].Price" value="@Model.Toppings[i].Price">
+                                    </td>
+                                    <td>
+                                        <input class="mr-2 " type="checkbox" asp-for="Toppings[i+1].CheckBoxAnswer"
+                                               onchange="document.getElementById('SelectedPizzaForm').submit()">
+                                        <label class="col-sm-2 align-text-top " asp-for="Toppings[i+1].Name">@Model.Toppings[i + 1].Name</label>
+                                        <input type="hidden" asp-for="Toppings[i+1].Id" value="@Model.Toppings[i+1].Id">
+                                        <input type="hidden" asp-for="Toppings[i+1].Name" value="@Model.Toppings[i+1].Name">
+                                        <input type="hidden" asp-for="Toppings[i+1].Price" value="@Model.Toppings[i+1].Price">
+                                    </td>
+                                </tr>
+                            }
+                        </table>
                     </div>
                     <span asp-validation-for="Toppings" class="text-danger"></span>
                 </div>
                 <div class="form-group row">
                     <label asp-for="AddOns" class="col-sm-2 col-form-label"></label>
                     <div class="col-sm-10">
-                        @for (int i = 0; i < Model.AddOns.Count(); i++)
-                        {
-                            @if (Model.AddOns[i].AddOnName == "Stuff Crust" && Model.CurrentBase != Model.PizzaBase.FirstOrDefault(x => x.BaseName == "Fresh Pan Pizza").BaseId)
+                        <table>
+                            @for (int i = 0; i < Model.AddOns.Count(); i += 2)
                             {
-                                <input class="mr-2 " type="checkbox" disabled asp-for="AddOns[i].Selected">
-                            }
-                            else
-                            {
-                                <input class="mr-2 " type="checkbox" asp-for="AddOns[i].Selected" onchange="document.getElementById('SelectedPizzaForm').submit()">
-                            }
+                                <tr>
+                                    <td>
+                                        @if (Model.AddOns[i].AddOnName == "Stuff Crust" && Model.CurrentBase != Model.PizzaBase.FirstOrDefault(x => x.BaseName == "Fresh Pan Pizza").BaseId)
+                                        {
+                                            <input class="mr-2 " type="checkbox" disabled asp-for="AddOns[i].Selected">
+                                        }
+                                        else
+                                        {
+                                            <input class="mr-2 " type="checkbox" asp-for="AddOns[i].Selected" onchange="document.getElementById('SelectedPizzaForm').submit()">
+                                        }
 
-                            <label class="col-sm-2 align-text-top " asp-for="AddOns[i].AddOnName">@Model.AddOns[i].AddOnName</label>
-                            <input type="hidden" asp-for="AddOns[i].Id" value="@Model.AddOns[i].Id">
-                            <input type="hidden" asp-for="AddOns[i].AddOnName" value="@Model.AddOns[i].AddOnName">
-                            <input type="hidden" asp-for="AddOns[i].AddOnPrice" value="@Model.AddOns[i].AddOnPrice">
-                        }
+                                        <label class="col-sm-2 align-text-top " asp-for="AddOns[i].AddOnName">@Model.AddOns[i].AddOnName</label>
+                                        <input type="hidden" asp-for="AddOns[i].Id" value="@Model.AddOns[i].Id">
+                                        <input type="hidden" asp-for="AddOns[i].AddOnName" value="@Model.AddOns[i].AddOnName">
+                                        <input type="hidden" asp-for="AddOns[i].AddOnPrice" value="@Model.AddOns[i].AddOnPrice">
+                                    </td>
+                                    <td>
+                                        @if (Model.AddOns[i + 1].AddOnName == "Stuff Crust" && Model.CurrentBase != Model.PizzaBase.FirstOrDefault(x => x.BaseName == "Fresh Pan Pizza").BaseId)
+                                        {
+                                            <input class="mr-2 " type="checkbox" disabled asp-for="AddOns[i+1].Selected">
+                                        }
+                                        else
+                                        {
+                                            <input class="mr-2 " type="checkbox" asp-for="AddOns[i+1].Selected" onchange="document.getElementById('SelectedPizzaForm').submit()">
+                                        }
+
+                                        <label class="col-sm-2 align-text-top " asp-for="AddOns[i+1].AddOnName">@Model.AddOns[i + 1].AddOnName</label>
+                                        <input type="hidden" asp-for="AddOns[i+1].Id" value="@Model.AddOns[i+1].Id">
+                                        <input type="hidden" asp-for="AddOns[i+1].AddOnName" value="@Model.AddOns[i+1].AddOnName">
+                                        <input type="hidden" asp-for="AddOns[i+1].AddOnPrice" value="@Model.AddOns[i+1].AddOnPrice">
+                                    </td>
+                                </tr>
+                            }
+                        </table>
                     </div>
                 </div>
 
@@ -94,18 +131,20 @@
 
                 <div class="form-group row">
                     <div class="col-sm-10">
+                        <a class="btn btn-primary" asp-action="HomePage" asp-controller="Home">Back</a>
                         <button type="submit" class="btn btn-primary">Total Cost</button>
                     </div>
                     <div>Cost = <span>&#163;</span>@Model.TotalCost</div>
                 </div>
             </div>
         </form>
-        
-    <div class="cen ">
-        @if (ViewBag.ActivateOrderButton?? false && ViewData.ModelState.IsValid)
-        {
-            <a class="btn btn-success" onclick="location.href='@Url.Action("Index","CustomerDetails", Model)'">Place Order</a>
-        }
-    </div>
 
+        <div class="cen ">
+            @if (ViewBag.ActivateOrderButton ?? false && ViewData.ModelState.IsValid)
+            {
+                <a class="btn btn-success" onclick="location.href='@Url.Action("Index","CustomerDetails", Model)'">Place Order</a>
+            }
+        </div>
+
+    </div>
 </div>
