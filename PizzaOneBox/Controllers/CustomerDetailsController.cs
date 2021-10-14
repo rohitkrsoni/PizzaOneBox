@@ -13,9 +13,10 @@ namespace PizzaOneBox.Controllers
     {
 
         [HttpGet]
-        public IActionResult Index()
+        public IActionResult Index(Pizza selectedPizza)
         {
-            return View(new CustomerDetailsModel());
+            var customerModel = new CustomerDetailsModel() { CustomerSelectedPizza = selectedPizza };
+            return View(customerModel);
         }
 
     }

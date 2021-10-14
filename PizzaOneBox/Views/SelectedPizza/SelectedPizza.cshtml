@@ -101,7 +101,7 @@
     <div class="cen ">
         @if (ViewBag.ActivateOrderButton?? false && ViewData.ModelState.IsValid)
         {
-            <a class="btn btn-success" onclick="location.href='@Url.Action("Index","Delivery", Model)'">Place Order</a>
+            <a class="btn btn-success" onclick="location.href='@Url.Action("Index","CustomerDetails", Model)'">Place Order</a>
         }
     </div>
 
