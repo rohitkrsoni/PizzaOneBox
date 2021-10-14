@@ -1,14 +1,14 @@
-﻿@model PizzaOneBox.Models.UserView;
+﻿@model PizzaOneBox.Models.CustomerDetailsModel;
 @*
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
 @{}
 
 <div style="margin:auto;width:60%;height:40%;border:3px solid #73AD21;padding:10px;border-radius:10px; text-align:center;">
-    <h2 style="text-align:center;">Congratulations Model.UserName 🎉</h2>
-    <h5>We have received your order & it will be delivered at Model.UserAddress </h5>
-    <h5>Your order id is</h5> <h4> Model.OrderId </h4>
-    <h5>Please pay the delivery person Model.PizzaPrize </h5>
+    <h2 style="text-align:center;">Congratulations @Model.CustomerName 🎉</h2>
+    <h5>We have received your order & it will be delivered at @Model.CustomerAddress </h5>
+    <h5>Your order id is</h5> <h4> @Model.OrderId </h4>
+    <h5>Please pay the delivery person @Model.CustomerSelectedPizza.TotalCost </h5>
     <br />
     <button type="button" class="btn btn-outline-success rounded-lg" onclick="@("window.location.href='" + @Url.Action("Index", "Home") + "'");">
         Home

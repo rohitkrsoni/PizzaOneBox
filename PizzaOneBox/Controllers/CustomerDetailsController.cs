@@ -18,6 +18,10 @@ namespace PizzaOneBox.Controllers
             var customerModel = new CustomerDetailsModel() { CustomerSelectedPizza = selectedPizza };
             return View(customerModel);
         }
-
+        [HttpPost]
+        public IActionResult Index(CustomerDetailsModel customerDetails)
+        {
+            return RedirectToAction("Index", "ConfirmationPg", customerDetails);
+        }
     }
 }

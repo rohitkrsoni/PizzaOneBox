@@ -9,19 +9,19 @@ namespace PizzaOneBox.Controllers
 {
     public class ConfirmationPgController : Controller
     {
-        public IActionResult Index()
+        [HttpGet]
+        public IActionResult Index(CustomerDetailsModel customerDetails)
         {
             Random r = new Random();
-            var userView = new UserView();
-            userView.OrderId = r.Next()%1000000; //Model "order " store all info displayed
-            if (userView.PizzaPrize != 20)
+            
+            customerDetails.OrderId = r.Next()%1000000; //Model "order " store all info displayed
+            if (customerDetails.CustomerSelectedPizza.TotalCost >= 20m)
             {
                 ViewBag.Message = String.Format("Congratulations you are served with 15% discount!!!");
+                customerDetails.CustomerSelectedPizza.TotalCost -=
+                    customerDetails.CustomerSelectedPizza.TotalCost * 0.15m;
             }
-
-            userView.PizzaPrize = userView.PizzaPrize - userView.PizzaPrize*0.15m;
-
-            return View("ConfirmationPg");
+            return View(customerDetails);
         }
     }
 }
