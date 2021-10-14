@@ -69,3 +69,20 @@ body {
   white-space: nowrap;
   line-height: 60px; /* Vertically center the text there */
 }
+.pizzaTitle{
+    margin-top:20px;
+
+}
+.cen {
+    margin: auto;
+    width: 0%;
+}
+.img{
+    width:200px;
+    height:200px;
+
+}
+.btn {
+    white-space: nowrap;
+    text-align: center;
+}
