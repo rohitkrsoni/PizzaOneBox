@@ -7,17 +7,18 @@
 <!DOCTYPE html>
 <html>
 <body>
-    <div class="container-fluid">
-        <img class="img-fluid image-resize bannersize" asp-append-version="true" src="~/Pizza_images/banner.jpg" alt="banner" />
+
+    <div>
+        <img class="image-resize bannersize" asp-append-version="true" src="~/Pizza_images/banner.jpg" alt="banner" />
     </div>
     <br />
     <br />
-    <div class="container-fluid">
-        <div class="row py-5 px-4 ">
+    <div class="container">
+        <div class="row py-5  ">
             @foreach (var pizza in Model)
             {
                 <div class=" col-lg-4">
-                    <div class="card md-4 ">
+                    <div class="card md-4 shadow-lg p-3 mb-5 bg-white rounded " style="border-radius:5px; ">
                         <img src=@pizza.PhotoPath class=" card-img-top pizzaphoto " />
                         <div class="card-body">
                             <h4 class="card-title">@pizza.PizzaName</h4>

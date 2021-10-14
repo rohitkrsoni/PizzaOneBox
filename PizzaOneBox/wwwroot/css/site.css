@@ -2,8 +2,9 @@
 for details on configuring this project to bundle and minify static web assets. */
 
 .bannersize {
-    height: 400px;
-    width: 100%;
+    height: 450px;
+    width: 145%;
+    margin-left: -20%;
 }
 
 .pizzaTitle {
@@ -11,12 +12,13 @@ for details on configuring this project to bundle and minify static web assets. 
 }
 
 .card {
-    border: 1px solid;
-    height: 95%;
+    border: 0px solid;
+    height: 90%;
 }
 .card-text {
     height: 40px;
 }
+
 .cen {
     margin: auto;
     width: 0%;
@@ -35,4 +37,15 @@ for details on configuring this project to bundle and minify static web assets. 
 .btn {
     white-space: nowrap;
     text-align: center;
+}
+.bg-image {
+    /* The image used */
+    background-image: url("/Pizza_images/pizza1.jpg");
+    /* Add the blur effect */
+    backdrop-filter: blur(10px);
+    /* Full height */
+    /* Center and scale the image nicely */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
 }
