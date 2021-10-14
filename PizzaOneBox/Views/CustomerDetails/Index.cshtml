@@ -9,8 +9,10 @@
 <div class="row">
     <div class="col-md-4">
         <form asp-controller="CustomerDetails" asp-action="Index"  method="post">
-            <input type ="hidden"asp-for="CustomerSelectedPizza" value="@Model.CustomerSelectedPizza">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <input type="hidden" asp-for="CustomerSelectedPizzaJson" value="@Model.CustomerSelectedPizzaJson" />
+            </div>
             <div class="form-group">
                 <label asp-for="CustomerName" class="control-label">Name:</label>
                 <input asp-for="CustomerName" class="form-control" />
