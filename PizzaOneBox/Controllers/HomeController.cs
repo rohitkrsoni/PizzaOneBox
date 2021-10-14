@@ -5,7 +5,7 @@ namespace PizzaOneBox.Controllers
 {
     public class HomeController : Controller
     {
-   {
+   
         [HttpGet]
         public ActionResult HomePage()
         {
