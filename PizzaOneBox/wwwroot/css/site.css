@@ -2,7 +2,7 @@
 for details on configuring this project to bundle and minify static web assets. */
 
 .bannersize {
-    height: 40%;
+    height: 15%;
     width: 139%;
     margin-left: -20%;
 }
@@ -54,4 +54,10 @@ for details on configuring this project to bundle and minify static web assets. 
     text-align: center;
     display: inline-block;
     float: none;
+}
+
+.divider {
+    width: 50%;
+    height: auto;
+    display: inline-block;
 }
