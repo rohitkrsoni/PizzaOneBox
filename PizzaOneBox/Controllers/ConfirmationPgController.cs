@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text.Json;
 using System.Threading.Tasks;
 
+
 namespace PizzaOneBox.Controllers
 {
     public class ConfirmationPgController : Controller
@@ -19,11 +20,14 @@ namespace PizzaOneBox.Controllers
             customerDetails.OrderId = r.Next()%1000000; //Model "order " store all info displayed
             if (customerDetails.CustomerSelectedPizza.TotalCost >= 20m)
             {
-                ViewBag.Discount = customerDetails.CustomerSelectedPizza.TotalCost * 0.15m;
+                ViewBag.Discount = Math.Round((customerDetails.CustomerSelectedPizza.TotalCost * 0.15m),2);
                 customerDetails.CustomerSelectedPizza.TotalCost -=
                     customerDetails.CustomerSelectedPizza.TotalCost * 0.15m;
+                customerDetails.CustomerSelectedPizza.TotalCost = Math.Round(customerDetails.CustomerSelectedPizza.TotalCost, 2);
             }
+
             return View("ConfirmationPg",customerDetails);
         }
+
     }
 }
