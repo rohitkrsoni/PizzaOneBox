@@ -22,6 +22,7 @@ namespace PizzaOneBox.Controllers
                 ViewBag.Discount = customerDetails.CustomerSelectedPizza.TotalCost * 0.15m;
                 customerDetails.CustomerSelectedPizza.TotalCost -=
                     customerDetails.CustomerSelectedPizza.TotalCost * 0.15m;
+                customerDetails.CustomerSelectedPizza.TotalCost = Math.Round(customerDetails.CustomerSelectedPizza.TotalCost, 2);
             }
             return View("ConfirmationPg",customerDetails);
         }
