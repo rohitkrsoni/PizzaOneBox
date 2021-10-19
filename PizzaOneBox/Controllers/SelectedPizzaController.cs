@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using PizzaOneBox.DataAccessLayer;
 using PizzaOneBox.Models;
+using PizzaOneBox.ViewModel;
 
 namespace PizzaOneBox.Controllers
 {
@@ -11,21 +12,40 @@ namespace PizzaOneBox.Controllers
         {
             _pizzaRepository = pizzaRepository;
         }
+
         [HttpGet]
         public IActionResult SelectedPizza(int id)
         {
-            Pizza currentPizza = _pizzaRepository.GetPizza(id);
+            SelectPizzaViewModel selectedPizza = new SelectPizzaViewModel()
+            {
+                Pizza = _pizzaRepository.GetPizzaById(id),
+                PizzaBase = _pizzaRepository.GetAllPizzaBase(),
+                PizzaSize = _pizzaRepository.GetAllPizzaSize(),
+                Toppings = _pizzaRepository.GetAllPizzaToppings(),
+                AddOns = _pizzaRepository.GetAllPizzaAddOn()
+            };
+
+            OrderDetail orderDetail = new OrderDetail()
+            {
+                PizzaId = id
+
+            };
             ViewBag.ActivateOrderButton = false;
-            return View(currentPizza);
+            return View(selectedPizza);
         }
+
         [HttpPost]
-        public IActionResult SelectedPizza(Pizza pizza)
+        [ValidateAntiForgeryToken]
+        public IActionResult SelectedPizza(SelectPizzaViewModel selectedPizza)
         {
-            if (!ModelState.IsValid) return View(pizza);
+            if (!ModelState.IsValid) 
+                return View(selectedPizza);
+
             ViewBag.ActivateOrderButton = true;
 
-            pizza.TotalCost = _pizzaRepository.GetPizzaCost(pizza);
-            return View(pizza);
+            selectedPizza.Pizza.Price += _pizzaRepository.GetPizzaCost(selectedPizza.Pizza);
+
+            return RedirectToAction("Index","CustomerDetails", selectedPizza.Pizza);
         }
         
     }

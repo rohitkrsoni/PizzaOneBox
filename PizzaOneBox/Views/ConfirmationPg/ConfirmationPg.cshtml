@@ -8,7 +8,7 @@
     <h2 style="text-align:center;">Congratulations @Model.CustomerName 🎉</h2>
     <h5>We have received your order & it will be delivered at @Model.CustomerAddress </h5>
     <h5>Your order id is</h5> <h4> @Model.OrderId </h4>
-    <h5>Please pay the delivery person @Model.CustomerSelectedPizza.TotalCost </h5>
+    <h5>Please pay the delivery person @Model.CustomerSelectedPizza.Price </h5>
     <br />
     <button type="button" class="btn btn-outline-success rounded-lg" onclick="@("window.location.href='" + @Url.Action("Index", "Home") + "'");">
         Home

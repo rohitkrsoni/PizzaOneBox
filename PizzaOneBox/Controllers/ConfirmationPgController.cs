@@ -16,13 +16,13 @@ namespace PizzaOneBox.Controllers
             customerDetails.CustomerSelectedPizza = JsonSerializer.Deserialize<Pizza>(customerDetails.CustomerSelectedPizzaJson);
             Random r = new Random();
             
-            customerDetails.OrderId = r.Next()%1000000; //Model "order " store all info displayed
-            if (customerDetails.CustomerSelectedPizza.TotalCost >= 20m)
-            {
-                ViewBag.Message = string.Format("Congratulations you are served with 15% discount!!!");
-                customerDetails.CustomerSelectedPizza.TotalCost -=
-                    customerDetails.CustomerSelectedPizza.TotalCost * 0.15m;
-            }
+            //customerDetails.OrderId = r.Next()%1000000; //Model "order " store all info displayed
+            //if (customerDetails.CustomerSelectedPizza. >= 20m)
+            //{
+            //    ViewBag.Message = string.Format("Congratulations you are served with 15% discount!!!");
+            //    customerDetails.CustomerSelectedPizza.TotalCost -=
+            //        customerDetails.CustomerSelectedPizza.TotalCost * 0.15m;
+            //}
             return View("ConfirmationPg",customerDetails);
         }
     }

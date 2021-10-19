@@ -16,7 +16,7 @@ namespace PizzaOneBox.Controllers
         public IActionResult Index(Pizza selectedPizza)
         {
             var customerDetails = new CustomerDetailsModel() 
-            { CustomerSelectedPizzaJson = JsonSerializer.Serialize(selectedPizza) };
+            { CustomerSelectedPizza = selectedPizza };
             return View(customerDetails);
         }
         [HttpPost]

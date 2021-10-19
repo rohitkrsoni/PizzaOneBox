@@ -1,4 +1,5 @@
 ﻿using PizzaOneBox.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -6,13 +7,14 @@ namespace PizzaOneBox.DataAccessLayer
 {
     public class PizzaRepository : IPizzaRepository
     {
-        private readonly List<Pizza> _menuItems;
+        private readonly List<Pizza> _pizza;
         private readonly List<Topping> _toppingsList;
         private readonly List<AddOn> _addOns;
         private readonly List<PizzaBase> _baseList;
-        
-        private static readonly Dictionary<PizzaSize, decimal> s_pizzaSizePrice = new Dictionary<PizzaSize, decimal> { { PizzaSize.Small, 0m }, { PizzaSize.Medium, 4m }, { PizzaSize.Large, 8m } };
-  
+        private readonly List<PizzaSize> _sizeList;
+
+        // private static readonly Dictionary<PizzaSize, decimal> s_pizzaSizePrice = new Dictionary<PizzaSize, decimal> { { PizzaSize.Small, 0m }, { PizzaSize.Medium, 4m }, { PizzaSize.Large, 8m } };
+
 
         public PizzaRepository()
         {
@@ -43,42 +45,133 @@ namespace PizzaOneBox.DataAccessLayer
                new AddOn(){Id = 2,AddOnName = "Stuff Crust",AddOnPrice=1.8m}
             };
 
-            _menuItems = new List<Pizza>()
+            _sizeList = new List<PizzaSize>()
             {
-                new Pizza(){PizzaId=1,PizzaName="Margherita Pizza",Size = PizzaSize.Small,DefaultCost=14.49m,Toppings=_toppingsList,AddOns = _addOns,CurrentBase=1,PizzaBase = _baseList, Description = "A hugely popular margherita, with a deliciously tangy single cheese topping",PhotoPath = "~/Pizza_images/Margherita.jpg"},
-                new Pizza(){PizzaId=2,PizzaName="Farmhouse Pizza",Size=PizzaSize.Small,DefaultCost=15.49m,Toppings=_toppingsList,AddOns = _addOns,PizzaBase = _baseList,CurrentBase=1,Description = "Onion, Capsicum, Tomato, Grilled mushroom",PhotoPath = "~/Pizza_images/Farmhouse.jpg"},
-                new Pizza(){PizzaId=3,PizzaName="Peppy Paneer Pizza",Size=PizzaSize.Small,DefaultCost=15.49m,Toppings=_toppingsList,AddOns = _addOns,PizzaBase = _baseList,CurrentBase=1,Description="Paneer, Crisp Capsicum, Red Paprika",PhotoPath = "~/Pizza_images/Peppy_Paneer.jpg"},
-                new Pizza(){PizzaId=4,PizzaName="Cheese Corn Pizza",Size=PizzaSize.Small,DefaultCost=15.49m,Toppings=_toppingsList,AddOns = _addOns,PizzaBase = _baseList,CurrentBase=1,Description  = "Golden Corn",PhotoPath = "~/Pizza_images/Corn_&_Cheese.jpg"},
-                new Pizza(){PizzaId=5,PizzaName="Veggie Paradise Pizza",Size=PizzaSize.Small,DefaultCost=16.49m,Toppings=_toppingsList,AddOns = _addOns,PizzaBase = _baseList,CurrentBase=1,Description="Golden Corn, Black Olives, capsicum, Red Paprika",PhotoPath = "~/Pizza_images/VeggiParadise.jpg"},
-                new Pizza(){PizzaId=6,PizzaName="Extravaganza",Size=PizzaSize.Small,DefaultCost=16.49m,Toppings=_toppingsList,AddOns = _addOns,PizzaBase = _baseList,CurrentBase=1,Description="Mushroom, Corn, Tomato, Jalapeno",PhotoPath = "~/Pizza_images/Veg_Extravaganz.jpg"},
+                new PizzaSize(){Id = 1, Price = 1, Size = Size.Small },
+                new PizzaSize(){Id = 2, Price = 4, Size = Size.Medium },
+                new PizzaSize(){Id = 3, Price = 8, Size = Size.Large }
+            };
+
+            _pizza = new List<Pizza>()
+            {
+                new Pizza(){PizzaId=1,PizzaName="Margherita Pizza", Description = "A hugely popular margherita, with a deliciously tangy single cheese topping",PhotoPath = "~/Pizza_images/Margherita.jpg",Price = 14.49m},
+                new Pizza(){PizzaId=2,PizzaName="Farmhouse Pizza",Description = "Onion, Capsicum, Tomato, Grilled mushroom",PhotoPath = "~/Pizza_images/Farmhouse.jpg", Price = 15.49m},
+                new Pizza(){PizzaId=3,PizzaName="Peppy Paneer Pizza",Description="Paneer, Crisp Capsicum, Red Paprika",PhotoPath = "~/Pizza_images/Peppy_Paneer.jpg", Price = 15.49m},
+                new Pizza(){PizzaId=4,PizzaName="Cheese Corn Pizza",Description  = "Golden Corn",PhotoPath = "~/Pizza_images/Corn_&_Cheese.jpg", Price = 14.49m},
+                new Pizza(){PizzaId=5,PizzaName="Veggie Paradise Pizza",Description="Golden Corn, Black Olives, capsicum, Red Paprika",PhotoPath = "~/Pizza_images/VeggiParadise.jpg", Price = 14.49m},
+                new Pizza(){PizzaId=6,PizzaName="Extravaganza",Description="Mushroom, Corn, Tomato, Jalapeno",PhotoPath = "~/Pizza_images/Veg_Extravaganz.jpg", Price = 16.49m},
+                new Pizza(){PizzaId=7,PizzaName="Custom",Description="Make your own Pizza add what ever toppings you like.",PhotoPath = "~/Pizza_images/Veg_Extravaganz.jpg", Price = 10}
             };
 
             
         }
-        public Pizza GetPizza(int id)
+
+        public IEnumerable<Pizza> GetAllPizza()
         {
-            return _menuItems.FirstOrDefault(pizza => pizza.PizzaId == id);
+            return _pizza;
+        }
+        public Pizza GetPizzaById(int id)
+        {
+            return _pizza.FirstOrDefault(pizza => pizza.PizzaId == id);
+        }
+
+        public IList<Topping> GetAllPizzaToppings()
+        {
+            return _toppingsList;
+        }
+
+        public Topping GetPizzaToppingsById(int id)
+        {
+            return _toppingsList.FirstOrDefault(t => t.Id == id);
+        }
+
+        public IList<PizzaBase> GetAllPizzaBase()
+        {
+            return _baseList;
+        }
+
+        public PizzaBase GetPizzaBaseById(int id)
+        {
+            return _baseList.FirstOrDefault(b => b.BaseId == id);
+        }
+
+        public IList<PizzaSize> GetAllPizzaSize()
+        {
+            return _sizeList;
+        }
+
+        public PizzaSize GetPizzaSizeById(int id)
+        {
+            return _sizeList.FirstOrDefault(s => s.Id == id);
+        }
+
+        public IList<AddOn> GetAllPizzaAddOn()
+        {
+            return _addOns;
+        }
+
+        public AddOn GetPizzaAddOnById(int id)
+        {
+            return _addOns.FirstOrDefault(a => a.Id == id);
         }
 
         public decimal GetPizzaCost(Pizza pizza)
         {
-            decimal toppingCost = 0m;
-            decimal addOnsCost = 0m;
-           foreach(var topping in pizza.Toppings)
-            {
-                if (topping.CheckBoxAnswer) toppingCost += topping.Price;
-            }
-            foreach (var addOn in pizza.AddOns)
-            {
-                if (addOn.Selected) addOnsCost += addOn.AddOnPrice;
-            }
-            return  pizza.DefaultCost +
-                    _baseList.FirstOrDefault(x => x.BaseId == pizza.CurrentBase).BasePrice+
-                    s_pizzaSizePrice.GetValueOrDefault(pizza.Size)+
-                    toppingCost+
-                    addOnsCost;
+            return CalculateTotalPizzaCost(pizza);
         }
 
+        private decimal CalculateToppingsCost(Pizza pizza)
+        {
+            decimal toppingCost = 0m;
+
+            foreach (var toppingId in pizza.ToppingsId)
+            {
+                int id;
+                bool number = int.TryParse(toppingId, out id);
+
+                if (number)
+                {
+                    var topping = GetPizzaToppingsById(id);
+                    toppingCost += topping.Price;
+                }
+
+            }
+
+            return toppingCost;
+        }
+
+        private decimal CalculateAddOnsCost(Pizza pizza)
+        {
+            decimal addOnsCost = 0m;
+
+
+            foreach (var addOnId in pizza.AddOnsId)
+            {
+                int id;
+                bool number = int.TryParse(addOnId, out id);
+
+                if (number)
+                {
+                    var addOn = GetPizzaAddOnById(id);
+                    addOnsCost += addOn.AddOnPrice;
+                }
+
+            }
+
+            return addOnsCost;
+        }
+
+        private decimal CalculateTotalPizzaCost(Pizza pizza)
+        {
+            var toppingCost = CalculateToppingsCost(pizza);
+            var addOnsCost = CalculateAddOnsCost(pizza);
+
+            var totalPizzaCost = _baseList.FirstOrDefault(b => b.BaseId == pizza.PizzaBaseId).BasePrice +
+                                _sizeList.FirstOrDefault(s => s.Id == pizza.PizzaSizeId).Price +
+                                toppingCost + addOnsCost;
+
+            return totalPizzaCost;
+        }
         
 
        
