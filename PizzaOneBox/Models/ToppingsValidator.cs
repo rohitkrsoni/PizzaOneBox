@@ -7,12 +7,20 @@ namespace PizzaOneBox.Models
     {
         public override bool IsValid(object value)
         {
-            var toppings = value as List<Topping>;
-            foreach (var topping in toppings)
+            try
             {
-                if (topping.CheckBoxAnswer) return true;
+                var toppings = value as List<Topping>;
+            
+                foreach (var topping in toppings)
+                {
+                    if (topping.CheckBoxAnswer) return true;
+                }
+                return false;
             }
-            return false;
+            catch(System.NullReferenceException e)
+            {
+                return false;
+            }
         }
     }
 }

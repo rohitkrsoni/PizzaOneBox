@@ -4,24 +4,36 @@
 *@
 @{}
 
-<div style="margin:auto;width:60%;height:40%;border:3px solid #73AD21;padding:10px;border-radius:10px; text-align:center;">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js" integrity="sha512-GsLlZN/3F2ErC5ifS5QtgpiJtWd43JWSuIgh7mbzZ8zBps+dvLusV+eNQATqgA/HdeKFVgA5v3S/cIrLF7QnIg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+<div style="margin:15%; width: 60%;    height: 40%;    border: 3px solid #73AD21;
+     padding: 10px;    border-radius: 10px;    text-align: center;    background-color: white; " id="parentDiv">
     <h2 style="text-align:center;">Congratulations @Model.CustomerName 🎉</h2>
-    <h5>We have received your order & it will be delivered at @Model.CustomerAddress </h5>
-    <h5>Your order id is</h5> <h4> @Model.OrderId </h4>
-    <h5>Please pay the delivery person @Model.CustomerSelectedPizza.TotalCost </h5>
+    @if (ViewBag.Discount != 0)
+    {
+        <h4>Congratulations you have saved @ViewBag.Discount £ 🎉 </h4>
+    }
+    <h5>We have received your order & it will be delivered at <br /> @Model.CustomerAddress </h5>
+    <h5>Your order id is : </h5> <h4> @Model.OrderId </h4><br />
+
+
+    <h4>Please pay the delivery person </h4> <h5> @Model.CustomerSelectedPizza.TotalCost £ </h5>
     <br />
     <button type="button" class="btn btn-outline-success rounded-lg" onclick="@("window.location.href='" + @Url.Action("HomePage", "Home") + "'");">
-        Home
-    </button>
+        Order Again
+    </button> 
+    <button type="button" style="margin-left:20%;" id="printPdf" class="btn btn-outline-info">Print Receipt</button>
 </div>
 
-@if (ViewBag.Message != null)
-{
-    <script type="text/javascript">
-
-            window.onload = function () {
-                alert("@ViewBag.Message");
-            };
+@section scripts{
+    <script>
+        $("#printPdf").click(function () {
+            var element = document.getElementById('parentDiv');
+            html2pdf().from(element).set({
+                margin: [0, 0, 0, 0],
+                pagebreak: { avoid: 'a' },
+                jsPDF: { orientation: 'landscape', unit: 'pt', format: 'letter', compressPDF: true }
+            }).save()
+        });
     </script>
-
-}  
+}

@@ -4,46 +4,64 @@
     ViewData["Title"] = "Contact Details";
 }
 
-<h4>Contact Details</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-controller="CustomerDetails" asp-action="Index"  method="post">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <input type="hidden" asp-for="CustomerSelectedPizzaJson" value="@Model.CustomerSelectedPizzaJson" />
-            </div>
-            <div class="form-group">
-                <label asp-for="CustomerName" class="control-label">Name:</label>
-                <input asp-for="CustomerName" class="form-control" />
-                <span asp-validation-for="CustomerName" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="CustomerEmail" class="control-label">Email:</label>
-                <input asp-for="CustomerEmail" class="form-control" placeholder="xyz@abc.com"/>
-                <span asp-validation-for="CustomerEmail" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="CustomerPhoneNumber" class="control-label">Phone Number:</label>
-                <input asp-for="CustomerPhoneNumber" class="form-control" placeholder="0000-000000"/>
-                <span asp-validation-for="CustomerPhoneNumber" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="CustomerAddress" class="control-label">Address:</label>
-                <input asp-for="CustomerAddress" class="form-control" />
-                <span asp-validation-for="CustomerAddress" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <button type="submit" class="btn btn-primary">Submit</button>
-            </div>
-        </form>
+<div style="margin: 10%; width: 60%;    height: 40%;    border: 3px solid #73AD21;  align-content:center;
+     padding: 10px;    border-radius: 10px;    text-align: center;    background-color: azure;">
+    <h4>Contact Details</h4>
+    <hr />
+    <div class="row">
+        <div class="col-md-12">
+            <form asp-controller="CustomerDetails" asp-action="Index" method="post" class="align-content-center">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <input type="hidden" asp-for="CustomerSelectedPizzaJson" value="@Model.CustomerSelectedPizzaJson" />
+                </div>
+                <table border="0" cellspacing="10" style="margin-left:15%;" >
+                    <tr style="width:300px;">
+                            <td>
+                                <label asp-for="CustomerName" class="control-label">Name:</label>
+                            </td>
+                            <td style="width:300px;">
+                                <input asp-for="CustomerName" class="form-control intextcentre" />
+                                <span asp-validation-for="CustomerName" class="text-danger"></span>
+                            </td>
+                        
+                    </tr>
+                    <tr style="width:300px;">
+                        
+                            <td><label asp-for="CustomerEmail" class="control-label">Email:</label></td>
+                            <td style="width:300px;"><input asp-for="CustomerEmail" class="form-control intextcentre" placeholder="xyz@abc.com" />
+                                <span asp-validation-for="CustomerEmail" class="text-danger"></span></td>
+                          
+                    </tr>
+                    <tr style="width: 300px;">
+                        
+                        <td><label asp-for="CustomerPhoneNumber" class="control-label">Phone Number:</label></td>
+                        <td style="width:300px;"><input asp-for="CustomerPhoneNumber" class="form-control intextcentre" placeholder="0000-000000" />
+                        <span asp-validation-for="CustomerPhoneNumber" class="text-danger"></span></td>
+                        
+                    </tr>
+                    <tr style="width: 300px;">
+                        <td><label asp-for="CustomerAddress" class="control-label">Address:</label></td>
+                        <td style="width:300px;"><input asp-for="CustomerAddress" class="form-control intextcentre" />
+                        <span asp-validation-for="CustomerAddress" class="text-danger"></span></td>
+                    </tr>
+                </table>
+                <br />
+                <div style="text-align: center;">
+
+                    <button type="button" class="btn btn-outline-success rounded-lg" style="margin-left:10%;"
+                            onclick="@("window.location.href='" + @Url.Action("HomePage", "Home") + "'");">
+                        Back to Home
+                    </button>
+                    <div class="divider" />
+                    <button type="submit" class="btn btn-primary" style="margin-right:auto;">Submit</button>
+
+                </div>
+            </form> <br />
+             <br />
+        </div>
     </div>
 </div>
-
-<div>
-    <a asp-action="Index">Back to Home</a>
-</div>
-
 @section Scripts{ 
       @{await Html.RenderPartialAsync("_ValidationScriptsPartial");
         }
