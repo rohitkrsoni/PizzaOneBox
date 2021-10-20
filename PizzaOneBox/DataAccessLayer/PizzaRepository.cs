@@ -32,11 +32,11 @@ namespace PizzaOneBox.DataAccessLayer
             };
             _baseList = new List<PizzaBase>
             {
-                new PizzaBase(){BaseId = 1,BaseName = "Hand Tossed",BasePrice=0m},
-                new PizzaBase(){BaseId = 2,BaseName = "Cheese Burst",BasePrice=5.5m},
-                new PizzaBase(){BaseId = 3,BaseName = "Wheat Thin Crust",BasePrice=-1.5m},
-                new PizzaBase(){BaseId = 4,BaseName = "Fresh Pan Pizza",BasePrice=0.5m},
-                new PizzaBase(){BaseId = 5,BaseName = "Italian",BasePrice=0.5m}
+                new PizzaBase(){BaseId = 1,BaseName = BaseName.HandTossed, BasePrice=0m},
+                new PizzaBase(){BaseId = 2,BaseName = BaseName.CheeseBurst, BasePrice=5.5m},
+                new PizzaBase(){BaseId = 3,BaseName = BaseName.WheatThinCrust, BasePrice=-1.5m},
+                new PizzaBase(){BaseId = 4,BaseName = BaseName.FreshPanPizza, BasePrice=0.5m},
+                new PizzaBase(){BaseId = 5,BaseName = BaseName.Italian, BasePrice=0.5m}
 
             };
             _addOns = new List<AddOn>()

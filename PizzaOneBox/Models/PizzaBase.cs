@@ -1,10 +1,28 @@
 ﻿
+using System.ComponentModel.DataAnnotations;
+
 namespace PizzaOneBox.Models
 {
+    public enum BaseName
+    {
+        [Display(Name = "Hand Tossed")]
+        HandTossed = 1,
+
+        [Display(Name = "Cheese Burst")]
+        CheeseBurst,
+
+        [Display(Name = "Wheat Thin Crust")]
+        WheatThinCrust,
+
+        [Display(Name = "Fresh Pan Pizza")]
+        FreshPanPizza,
+
+        Italian
+    }
     public class PizzaBase
     {
         public int BaseId { get; set; }
-        public string BaseName { get; set; }
+        public BaseName BaseName { get; set; }
         public decimal BasePrice { get; set; }
     }
 }

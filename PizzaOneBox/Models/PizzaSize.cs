@@ -1,9 +1,11 @@
 ﻿
+using System.ComponentModel.DataAnnotations;
+
 namespace PizzaOneBox.Models
 {
     public enum Size
     {
-        Small,
+        Small = 1,
         Medium,
         Large
     }
@@ -11,6 +13,8 @@ namespace PizzaOneBox.Models
     public class PizzaSize
     {
         public int Id { get; set; }
+
+       // [EnumDataType(typeof(Size))]
         public Size Size { get; set; }
         public decimal Price { get; set; }
     }
