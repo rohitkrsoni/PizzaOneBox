@@ -11,13 +11,13 @@
     <h2 style="text-align:center;">Congratulations @Model.CustomerName 🎉</h2>
     @if (ViewBag.Discount != 0)
     {
-        <h4>Congratulations you have saved @ViewBag.Discount £ 🎉 </h4>
+<h4>Congratulations you have saved £@ViewBag.Discount 🎉 </h4>
     }
     <h5>We have received your order & it will be delivered at <br /> @Model.CustomerAddress </h5>
     <h5>Your order id is : </h5> <h4> @Model.OrderId </h4><br />
 
 
-    <h4>Please pay the delivery person </h4> <h5> @Model.CustomerSelectedPizza.TotalCost £ </h5>
+    <h4>Please pay the delivery person </h4> <h5> £@Model.CustomerSelectedPizza.TotalCost</h5>
     <br />
     <button type="button" class="btn btn-outline-success rounded-lg" onclick="@("window.location.href='" + @Url.Action("HomePage", "Home") + "'");">
         Order Again

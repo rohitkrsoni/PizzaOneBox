@@ -59,7 +59,7 @@
                         {
 
                             <input class="mr-2 " type="checkbox" asp-for="Toppings[i].CheckBoxAnswer" onchange="document.getElementById('SelectedPizzaForm').submit()">
-                            <label class="col-sm-2 align-text-top " asp-for="Toppings[i].Name">@Model.Toppings[i].Name</label>
+                            <label class="col-sm-2 align-text-top " asp-for="Toppings[i].CheckBoxAnswer">@Model.Toppings[i].Name</label>
                             <input type="hidden" asp-for="Toppings[i].Id" value="@Model.Toppings[i].Id">
                             <input type="hidden" asp-for="Toppings[i].Name" value="@Model.Toppings[i].Name">
                             <input type="hidden" asp-for="Toppings[i].Price" value="@Model.Toppings[i].Price">
@@ -81,7 +81,7 @@
                                 <input class="mr-2 " type="checkbox" asp-for="AddOns[i].Selected" onchange="document.getElementById('SelectedPizzaForm').submit()">
                             }
 
-                            <label class="col-sm-2 align-text-top " asp-for="AddOns[i].AddOnName">@Model.AddOns[i].AddOnName</label>
+                            <label class="col-sm-2 align-text-top " asp-for="AddOns[i].Selected">@Model.AddOns[i].AddOnName</label>
                             <input type="hidden" asp-for="AddOns[i].Id" value="@Model.AddOns[i].Id">
                             <input type="hidden" asp-for="AddOns[i].AddOnName" value="@Model.AddOns[i].AddOnName">
                             <input type="hidden" asp-for="AddOns[i].AddOnPrice" value="@Model.AddOns[i].AddOnPrice">
