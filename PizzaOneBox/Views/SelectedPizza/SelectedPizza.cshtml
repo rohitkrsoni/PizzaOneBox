@@ -1,6 +1,6 @@
 ﻿@model Pizza;
 @using Microsoft.AspNetCore.Http;
-<div class="container bg-light " style="margin: 20px; padding: 20px; border-radius: 10px;">
+<div class="container bg-white " style="margin: 20px; padding: 20px; border-radius: 10px;">
         
         <form class="pizzaTitle" id="SelectedPizzaForm" asp-controller="SelectedPizza" asp-action="SelectedPizza" method="post">
             <div class="center">
@@ -97,7 +97,10 @@
                     <div class="col-sm-5">
                         @if (ViewBag.ActivateOrderButton ?? false && ViewData.ModelState.IsValid)
                         {
-                            <a  class="btn btn-success placeOrder" onclick="location.href='@Url.Action("Index","CustomerDetails", Model)'">Place Order</a>
+                            <button type="button"  class="btn btn-success placeOrder" onclick="location.href='@Url.Action("Index","CustomerDetails", Model)'">Place Order</button>
+                        }
+                        else { 
+                            <button type="button" disabled class="btn btn-success placeOrder" >Place Order</button>
                         }
                     </div>
                     <div class="col-sm-2 ">Total Cost : <span>&#163;</span>@Model.TotalCost</div>
