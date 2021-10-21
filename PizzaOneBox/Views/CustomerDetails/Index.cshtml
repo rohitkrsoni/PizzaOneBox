@@ -1,4 +1,4 @@
-﻿@model PizzaOneBox.Models.CustomerDetailsModel
+﻿@model CustomerOrderViewModel
 
 @{
     ViewData["Title"] = "Contact Details";
@@ -11,33 +11,27 @@
         <form asp-controller="CustomerDetails" asp-action="Index"  method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                @{ 
-                    if (true)
-                    {
-                        Console.WriteLine(Model.CustomerSelectedPizza);
-                    }
-                }
-                <input type="hidden" asp-for="CustomerSelectedPizza" value="@Model.CustomerSelectedPizza" />
+                <input type="hidden" asp-for="OrderDetail.Pizza" value="@Model.OrderDetail.Pizza" />
             </div>
             <div class="form-group">
-                <label asp-for="CustomerName" class="control-label">Name:</label>
-                <input asp-for="CustomerName" class="form-control" />
-                <span asp-validation-for="CustomerName" class="text-danger"></span>
+                <label asp-for="CustomerDetails.CustomerName" class="control-label">Name:</label>
+                <input asp-for="CustomerDetails.CustomerName" class="form-control" />
+                <span asp-validation-for="CustomerDetails.CustomerName" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="CustomerEmail" class="control-label">Email:</label>
-                <input asp-for="CustomerEmail" class="form-control" placeholder="xyz@abc.com"/>
-                <span asp-validation-for="CustomerEmail" class="text-danger"></span>
+                <label asp-for="CustomerDetails.CustomerEmail" class="control-label">Email:</label>
+                <input asp-for="CustomerDetails.CustomerEmail" class="form-control" placeholder="xyz@abc.com"/>
+                <span asp-validation-for="CustomerDetails.CustomerEmail" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="CustomerPhoneNumber" class="control-label">Phone Number:</label>
-                <input asp-for="CustomerPhoneNumber" class="form-control" placeholder="0000-000000"/>
-                <span asp-validation-for="CustomerPhoneNumber" class="text-danger"></span>
+                <label asp-for="CustomerDetails.CustomerPhoneNumber" class="control-label">Phone Number:</label>
+                <input asp-for="CustomerDetails.CustomerPhoneNumber" class="form-control" placeholder="0000-000000"/>
+                <span asp-validation-for="CustomerDetails.CustomerPhoneNumber" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="CustomerAddress" class="control-label">Address:</label>
-                <input asp-for="CustomerAddress" class="form-control" />
-                <span asp-validation-for="CustomerAddress" class="text-danger"></span>
+                <label asp-for="CustomerDetails.CustomerAddress" class="control-label">Address:</label>
+                <input asp-for="CustomerDetails.CustomerAddress" class="form-control" />
+                <span asp-validation-for="CustomerDetails.CustomerAddress" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <button type="submit" class="btn btn-primary">Submit</button>

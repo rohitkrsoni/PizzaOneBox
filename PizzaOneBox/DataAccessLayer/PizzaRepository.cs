@@ -54,13 +54,13 @@ namespace PizzaOneBox.DataAccessLayer
 
             _pizza = new List<Pizza>()
             {
-                new Pizza(){PizzaId=1,PizzaName="Margherita Pizza", Description = "A hugely popular margherita, with a deliciously tangy single cheese topping",PhotoPath = "~/Pizza_images/Margherita.jpg",Price = 14.49m},
-                new Pizza(){PizzaId=2,PizzaName="Farmhouse Pizza",Description = "Onion, Capsicum, Tomato, Grilled mushroom",PhotoPath = "~/Pizza_images/Farmhouse.jpg", Price = 15.49m},
-                new Pizza(){PizzaId=3,PizzaName="Peppy Paneer Pizza",Description="Paneer, Crisp Capsicum, Red Paprika",PhotoPath = "~/Pizza_images/Peppy_Paneer.jpg", Price = 15.49m},
-                new Pizza(){PizzaId=4,PizzaName="Cheese Corn Pizza",Description  = "Golden Corn",PhotoPath = "~/Pizza_images/Corn_&_Cheese.jpg", Price = 14.49m},
-                new Pizza(){PizzaId=5,PizzaName="Veggie Paradise Pizza",Description="Golden Corn, Black Olives, capsicum, Red Paprika",PhotoPath = "~/Pizza_images/VeggiParadise.jpg", Price = 14.49m},
-                new Pizza(){PizzaId=6,PizzaName="Extravaganza",Description="Mushroom, Corn, Tomato, Jalapeno",PhotoPath = "~/Pizza_images/Veg_Extravaganz.jpg", Price = 16.49m},
-                new Pizza(){PizzaId=7,PizzaName="Custom",Description="Make your own Pizza add what ever toppings you like.",PhotoPath = "~/Pizza_images/Veg_Extravaganz.jpg", Price = 10}
+                new Pizza(){PizzaId=1,PizzaName="Margherita Pizza", Description = "A hugely popular margherita, with a deliciously tangy single cheese topping",PhotoPath = "/Pizza_images/Margherita.jpg",Price = 14.49m},
+                new Pizza(){PizzaId=2,PizzaName="Farmhouse Pizza",Description = "Onion, Capsicum, Tomato, Grilled mushroom",PhotoPath = "/Pizza_images/Farmhouse.jpg", Price = 15.49m},
+                new Pizza(){PizzaId=3,PizzaName="Peppy Paneer Pizza",Description="Paneer, Crisp Capsicum, Red Paprika",PhotoPath = "/Pizza_images/Peppy_Paneer.jpg", Price = 15.49m},
+                new Pizza(){PizzaId=4,PizzaName="Cheese Corn Pizza",Description  = "Golden Corn",PhotoPath = "/Pizza_images/Corn_&_Cheese.jpg", Price = 14.49m},
+                new Pizza(){PizzaId=5,PizzaName="Veggie Paradise Pizza",Description="Golden Corn, Black Olives, capsicum, Red Paprika",PhotoPath = "/Pizza_images/VeggiParadise.jpg", Price = 14.49m},
+                new Pizza(){PizzaId=6,PizzaName="Extravaganza",Description="Mushroom, Corn, Tomato, Jalapeno",PhotoPath = "/Pizza_images/Veg_Extravaganz.jpg", Price = 16.49m},
+                new Pizza(){PizzaId=7,PizzaName="Custom",Description="Make your own Pizza add what ever toppings you like.",PhotoPath = "/Pizza_images/Veg_Extravaganz.jpg", Price = 10}
             };
 
             

@@ -4,7 +4,7 @@
 <div class="container bg-light " style="margin:20px;">
     <div style="margin:20px;">
         
-        <form asp-controller="SelectedPizza" asp-action="SelectedPizza" method="post" class="pizzaTitle" >
+        <form id="selectedToppings" asp-controller="SelectedPizza" asp-action="SelectedPizza" method="post" class="pizzaTitle">
             <a class="btn btn-primary" asp-action="HomePage" asp-controller="Home">Back</a>
             <div class="center">
 
@@ -16,15 +16,15 @@
                     </div>
                     <input type="hidden" asp-for="Pizza.PizzaId" value="@Model.Pizza.PizzaId" />
                     @*<input type="hidden" asp-for="PizzaName" value="@Model.PizzaName">
-            <input type="hidden" asp-for="Description" value="@Model.Description">
-            <input type="hidden" asp-for="PhotoPath" value="@Model.PhotoPath">*@
+        <input type="hidden" asp-for="Description" value="@Model.Description">
+        <input type="hidden" asp-for="PhotoPath" value="@Model.PhotoPath">*@
                     @*@for (int i = 0; i < Model.PizzaBase.Count(); i++)
-            {
+        {
 
-                <input type="hidden" asp-for="PizzaBase[i].BaseId" value="@Model.PizzaBase[i].BaseId">
-                <input type="hidden" asp-for="PizzaBase[i].BaseName" value="@Model.PizzaBase[i].BaseName">
-                <input type="hidden" asp-for="PizzaBase[i].BasePrice" value="@Model.PizzaBase[i].BasePrice">
-            }*@
+            <input type="hidden" asp-for="PizzaBase[i].BaseId" value="@Model.PizzaBase[i].BaseId">
+            <input type="hidden" asp-for="PizzaBase[i].BaseName" value="@Model.PizzaBase[i].BaseName">
+            <input type="hidden" asp-for="PizzaBase[i].BasePrice" value="@Model.PizzaBase[i].BasePrice">
+        }*@
 
                 </div>
                 <div class="form-group row">
@@ -50,13 +50,57 @@
                         @foreach (SelectListItem topping in Model.Toppings)
                         {
                             <tr>
-                                <td><input id="@topping.Value" type="checkbox" name="Fruit" value="@topping.Value" checked="@topping.Selected" /></td>
+                                <td><input id="@topping.Value" type="checkbox" name="Toppings" value="@topping.Value" checked="@topping.Selected" /></td>
                                 <td><label for="@topping.Value">@topping.Text</label></td>
+                            </tr>
+                        }
+                        <span asp-validation-for="Toppings" class="text-danger"></span>
+
+                    </div>
+                </div>
+                <span class="error text-danger">Please select at-least one Topping.</span>
+                <br />
+                <div class="row">
+                    <label for="@Model.AddOns">Add Ons</label>
+                    <div class="col-6">
+                        @foreach (SelectListItem addOn in Model.AddOns)
+                        {
+                            <tr>
+                                <td><input id="@addOn.Value" type="checkbox" name="AddOns" value="@addOn.Value" checked="@addOn.Selected" /></td>
+                                <td><label for="@addOn.Value">@addOn.Text</label></td>
                             </tr>
                         }
                     </div>
                 </div>
-                @*@foreach (var size in Model.PizzaSize)
+                <div class="cen mb-5">
+                    <input id="btnSubmit" type="submit" value="Place Order" class="btn btn-primary" />
+                    @if (ViewBag.ActivateOrderButton ?? false)
+                    {
+                        <input type="submit" value="Place Order" class="btn btn-primary" />
+                    }
+                </div>
+                <div class="form-group row">
+                    <div class="col-sm-10">
+                        <button type="submit" class="btn btn-primary">Total Cost</button>
+                    </div>
+                    <div>Cost @Model.Pizza.Price.ToString("C")</div>
+                </div>
+            </div>
+
+            <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+            <script type="text/javascript">
+                $(function () {
+                    $("#btnSubmit").click(function () {
+                        var checked_checkboxes = $("#selectedToppings input[type=checkbox]:checked");
+                        if (checked_checkboxes.length == 0) {
+                            $(".error").show();
+                            return false;
+                        }
+                        return true;
+                    });
+                });
+            </script>
+            @*@foreach (var size in Model.PizzaSize)
         {
             <label asp-for="@size.Id" class="col-sm-2 col-form-label">@size.Size</label>
             <div class="col-sm-10">
@@ -67,7 +111,7 @@
 
 
 
-                @*<div class="form-group row">
+            @*<div class="form-group row">
                 <label asp-for="CurrentBase" class="col-sm-2 col-form-label"></label>
                 <div class="col-sm-10">
                     <select onchange="document.getElementById('SelectedPizzaForm').submit()" asp-for="CurrentBase" class="custom-select mr-sm-2 ">
@@ -148,6 +192,6 @@
             }
         </div>*@
 
-</form>
+        </form>
     </div>
 </div>

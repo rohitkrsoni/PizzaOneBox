@@ -9,7 +9,9 @@ namespace PizzaOneBox.Models
     {
         public int Id { get; set; }
         public int CustomerId { get; set; }
-        public int OrderNumber { get; set; }
+        public string Customer { get; set; }
+        public CustomerDetailsModel CustomerDetails { get; set; }
+        public int OrderNumber { get; internal set; }
         public DateTime Date { get; set; }
     }
 }

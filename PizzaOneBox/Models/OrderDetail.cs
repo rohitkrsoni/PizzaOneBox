@@ -10,6 +10,8 @@ namespace PizzaOneBox.Models
         public int Id { get; set; }
         public int OrderId { get; set; }
         public int PizzaId { get; set; }
+        public string Pizza { get; set; }
+        public Pizza Pizzas { get; set; }
         public decimal TotalCost { get; set; }
     }
 }

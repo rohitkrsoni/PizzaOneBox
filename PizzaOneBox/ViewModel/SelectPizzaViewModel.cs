@@ -13,7 +13,7 @@ namespace PizzaOneBox.ViewModel
         public PizzaBase PizzaBase { get; set; }
         public PizzaSize PizzaSize { get; set; }
         public List<SelectListItem> Toppings { get; set; }
-        public IList<AddOn> AddOns { get; set; }
+        public List<SelectListItem> AddOns { get; set; }
 
     }
 }

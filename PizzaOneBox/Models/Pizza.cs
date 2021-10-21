@@ -9,8 +9,8 @@ namespace PizzaOneBox.Models
         public string PizzaName { get; set; }
         public int PizzaSizeId { get; set; }
         public int PizzaBaseId { get; set; }
-        public IList<string> ToppingsId { get; set; }
-        public IList<string> AddOnsId { get; set; }
+        public IList<string> ToppingsId { get; internal set; } = new List<string>();
+        public IList<string> AddOnsId { get; internal set; } = new List<string>();
         public decimal Price { get; set; }
         // public PizzaSize Size { get; set; }
         //public decimal DefaultCost { get; set; }
@@ -20,8 +20,8 @@ namespace PizzaOneBox.Models
         //[ToppingsValidator(ErrorMessage = "Please select at least 1 Topping(s)")]
         //public List<Topping> Toppings { get; set; }
         //public IList<AddOn> AddOns { get; set; }
-        public string Description { get; set; }
-        public string PhotoPath { get; set; }
+        public string Description { get; internal set; }
+        public string PhotoPath { get; internal set; }
 
         
     }

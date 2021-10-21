@@ -3,7 +3,10 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using PizzaOneBox.DataAccessLayer;
 using PizzaOneBox.Models;
 using PizzaOneBox.ViewModel;
+using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Text.Json;
 
 namespace PizzaOneBox.Controllers
 {
@@ -24,7 +27,7 @@ namespace PizzaOneBox.Controllers
                 // PizzaBase = _pizzaRepository.GetPizzaBaseById(id),
                 // PizzaSize = _pizzaRepository.GetPizzaSizeById(id),
                 Toppings = PopulateToppings(),
-                AddOns = _pizzaRepository.GetAllPizzaAddOn()
+                AddOns = PopulateAddOns()
             };
 
             OrderDetail orderDetail = new OrderDetail()
@@ -38,16 +41,44 @@ namespace PizzaOneBox.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult SelectedPizza(SelectPizzaViewModel selectedPizza)
+        public IActionResult SelectedPizza(SelectPizzaViewModel selectedPizza, string[] toppings, string[] addOns)
         {
             if (!ModelState.IsValid)
                 return View(selectedPizza);
+
+            selectedPizza.Toppings = PopulateToppings();
+
+            foreach (SelectListItem topping in selectedPizza.Toppings)
+            {
+                if (toppings.Contains(topping.Value))
+                {
+                    selectedPizza.Pizza.ToppingsId.Add(topping.Value);
+                }
+            }
+
+            if (addOns.Length > 0)
+            {
+                foreach (SelectListItem addOn in selectedPizza.AddOns)
+                {
+                    if (addOns.Contains(addOn.Value))
+                    {
+                        selectedPizza.Pizza.PizzaId += Convert.ToInt32(addOn.Value);
+                    }
+                }
+
+            }
 
             ViewBag.ActivateOrderButton = true;
 
             selectedPizza.Pizza.Price += _pizzaRepository.GetPizzaCost(selectedPizza.Pizza);
 
-            return RedirectToAction("Index", "CustomerDetails", selectedPizza.Pizza);
+            var orderDetails = new OrderDetail()
+            {
+                Pizza = JsonSerializer.Serialize<Pizza>(selectedPizza.Pizza),
+                TotalCost = selectedPizza.Pizza.Price
+            };
+
+            return RedirectToAction("Index", "CustomerDetails", orderDetails);
         }
 
         private List<SelectListItem> PopulateToppings()
@@ -61,6 +92,22 @@ namespace PizzaOneBox.Controllers
                 {
                     Text = topping.Name,
                     Value = topping.Id.ToString()
+                });
+            }
+            return items;
+        }
+
+        private List<SelectListItem> PopulateAddOns()
+        {
+            List<SelectListItem> items = new List<SelectListItem>();
+            var addOns = _pizzaRepository.GetAllPizzaAddOn();
+
+            foreach (var addOn in addOns)
+            {
+                items.Add(new SelectListItem
+                {
+                    Text = addOn.AddOnName,
+                    Value = addOn.Id.ToString()
                 });
             }
             return items;

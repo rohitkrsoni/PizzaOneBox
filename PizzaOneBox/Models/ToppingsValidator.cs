@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace PizzaOneBox.Models
 {
-    public class ToppingsValidator:ValidationAttribute
+    public class ToppingsValidator : ValidationAttribute
     {
         public override bool IsValid(object value)
         {
