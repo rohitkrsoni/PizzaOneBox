@@ -16,6 +16,7 @@
                     <input type="hidden" asp-for="Description" value="@Model.Description">
                     <input type="hidden" asp-for="PhotoPath" value="@Model.PhotoPath">
                     <input type="hidden" asp-for="DefaultCost" value="@Model.DefaultCost" />
+                    <input type="hidden" asp-for="TotalCost" value="@Model.TotalCost" />
                     @for (int i = 0; i < Model.PizzaBase.Count(); i++)
                     {
 
@@ -97,7 +98,7 @@
                     <div class="col-sm-5">
                         @if (ViewBag.ActivateOrderButton ?? false && ViewData.ModelState.IsValid)
                         {
-                            <button type="button"  class="btn btn-success placeOrder" onclick="location.href='@Url.Action("Index","CustomerDetails", Model)'">Place Order</button>
+                            <button type="submit"  class="btn btn-success placeOrder" asp-action="PlaceOrder" asp-controller="CustomerDetails" >Place Order</button>
                         }
                         else { 
                             <button type="button" disabled class="btn btn-success placeOrder" >Place Order</button>

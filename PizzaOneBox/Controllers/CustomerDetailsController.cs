@@ -12,17 +12,13 @@ namespace PizzaOneBox.Controllers
 {
     public class CustomerDetailsController : Controller
     {
-        [HttpGet]
-        public IActionResult Index(Pizza selectedPizza)
-        {
-            var customerDetails = new CustomerDetailsModel() 
-            { CustomerSelectedPizzaJson = JsonSerializer.Serialize(selectedPizza) };
-            return View(customerDetails);
-        }
         [HttpPost]
-        public IActionResult Index(CustomerDetailsModel customerDetails)
+        public IActionResult PlaceOrder(Pizza finalPizza)
         {
-            return RedirectToAction("Index", "ConfirmationPg", customerDetails);
+            var customerDetail = new CustomerDetailsModel()
+            { CustomerSelectedPizzaJson = JsonSerializer.Serialize(finalPizza) };
+            return View("~/Views/CustomerDetails/Index.cshtml", customerDetail);
         }
+       
     }
 }
