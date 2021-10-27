@@ -1,6 +1,7 @@
 ﻿
 namespace PizzaOneBox.Models
 {
+    
     public class PizzaBase
     {
         public int BaseId { get; set; }

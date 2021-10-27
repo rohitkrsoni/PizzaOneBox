@@ -13,7 +13,7 @@ namespace PizzaOneBox.Models
             
                 foreach (var topping in toppings)
                 {
-                    if (topping.CheckBoxAnswer) return true;
+                    if (topping.Selected) return true;
                 }
                 return false;
             }

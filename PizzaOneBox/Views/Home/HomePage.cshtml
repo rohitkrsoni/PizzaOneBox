@@ -1,4 +1,4 @@
-﻿@model IEnumerable<PizzaOneBox.Models.HomePagePizzaModel>
+﻿@model IEnumerable<PizzaOneBox.Models.Pizza>
 
 
 @{
@@ -28,7 +28,7 @@
                             <p class="card-text ">@pizza.PizzaDescription </p>
                             <hr />
                             <div class="d-flex justify-content-between align-items-center py-3">
-                                <p> £@pizza.PizzaCost </p>
+                                <p> £@pizza.DefaultCost </p>
                                 <a href="/SelectedPizza/SelectedPizza/@pizza.Id" class="btn btn-primary"> Select </a>
                             </div>
                         </div>

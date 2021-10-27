@@ -6,7 +6,7 @@ namespace PizzaOneBox.Models
     public class CustomerDetailsModel
     {
         public string CustomerSelectedPizzaJson { get; set; }
-        public Pizza CustomerSelectedPizza { get; set; }
+        public SelectedPizzaViewModel CustomerSelectedPizza { get; set; }
         public int OrderId { get; set; }
         [Required(ErrorMessage ="Please enter your name")]
         [MinLength(2,ErrorMessage ="Name length should be of minimum 2 characters")]
