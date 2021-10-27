@@ -72,6 +72,7 @@ namespace PizzaOneBox.Controllers
             model.order.TotalCost = _totalCost;
             if (!ModelState.IsValid) return View("SelectedPizza", model);
             string customerSelectesPizzaJson = JsonSerializer.Serialize(model);
+
             return RedirectToAction("Index", "CustomerDetails", new { customizedPizzaJson= customerSelectesPizzaJson });
 
         }
