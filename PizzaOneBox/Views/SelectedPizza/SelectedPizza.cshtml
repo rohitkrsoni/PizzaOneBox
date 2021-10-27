@@ -1,4 +1,4 @@
-﻿@model SelectedPizzaViewModel;
+﻿@model OrderedPizzaDetails;
 @using Microsoft.AspNetCore.Http;
 <div class="container bg-white " style="margin: 20px; padding: 20px; border-radius: 10px;">
         
@@ -6,27 +6,27 @@
             <div class="center">
 
                 <div class="form-group row">
-                    <div class="col-sm-3"><img class=" img" asp-append-version="true" src="@Model.pizza.PhotoPath" /></div>
+                    <div class="col-sm-3"><img class=" img" asp-append-version="true" src="@Model.SelectedPizza.PhotoPath" /></div>
                     <div class="col-sm-9">
-                        <h3 class="col-sm-6 h3 pizzaTitle">@Model.pizza.PizzaName</h3>
-                        <p class="h5 col-sm-10">@Model.pizza.PizzaDescription</p>
+                        <h3 class="col-sm-6 h3 pizzaTitle">@Model.SelectedPizza.PizzaName</h3>
+                        <p class="h5 col-sm-10">@Model.SelectedPizza.PizzaDescription</p>
                     </div>
                     
 
                 </div>
                 <div class="form-group row">
-                    <label asp-for="order.Size" class="col-sm-2 col-form-label"></label>
+                    <label asp-for="Size" class="col-sm-2 col-form-label"></label>
                     <div class="col-sm-10">
-                        <select onchange="document.getElementById('SelectedPizzaForm').submit()" asp-for="order.Size" class="custom-select mr-sm-2"
+                        <select onchange="document.getElementById('SelectedPizzaForm').submit()" asp-for="Size" class="custom-select mr-sm-2"
                                 asp-items="Html.GetEnumSelectList<Size>()">
                         </select>
                     </div>
                 </div>
 
                 <div class="form-group row">
-                    <label asp-for="order.BaseId" class="col-sm-2 col-form-label"></label>
+                    <label asp-for="BaseId" class="col-sm-2 col-form-label"></label>
                     <div class="col-sm-10">
-                        <select onchange="document.getElementById('SelectedPizzaForm').submit()" asp-for="order.BaseId" asp-items="@(new SelectList(Model.order.Base,"BaseId","BaseName"))" class="custom-select mr-sm-2 ">
+                        <select onchange="document.getElementById('SelectedPizzaForm').submit()" asp-for="BaseId" asp-items="@(new SelectList(Model.Base,"BaseId","BaseName"))" class="custom-select mr-sm-2 ">
                             
                         </select>
 
@@ -34,35 +34,33 @@
                 </div>
 
                 <div class="form-group row">
-                    <label asp-for="order.Toppings" class="col-sm-2 align-middle col-form-label"></label>
+                    <label asp-for="Toppings" class="col-sm-2 align-middle col-form-label"></label>
                     <div class="col-sm-10">
-                        @for (int i = 0; i < Model.order.Toppings.Count; i++)
+                        @for (int i = 0; i < Model.Toppings.Count; i++)
                         {
 
-                            <input class="mr-2 " type="checkbox" asp-for="order.Toppings[i].Selected" onchange="document.getElementById('SelectedPizzaForm').submit()">
-                            <label class="col-sm-2 align-text-top " asp-for="order.Toppings[i].Selected">@Model.order.Toppings[i].Name</label>
-                            <input type="hidden" asp-for="order.Toppings[i].Id" value="@Model.order.Toppings[i].Id">
-                            <input type="hidden" asp-for="order.Toppings[i].Name" value="@Model.order.Toppings[i].Name">
-                            <input type="hidden" asp-for="order.Toppings[i].Price" value="@Model.order.Toppings[i].Price">
+                            <input class="mr-2 " type="checkbox" asp-for="Toppings[i].Selected" onchange="document.getElementById('SelectedPizzaForm').submit()">
+                            <label class="col-sm-2 align-text-top " asp-for="Toppings[i].Selected">@Model.Toppings[i].Name</label>
+                            
                         }
                     </div>
-                    <span asp-validation-for="order.Toppings" class="text-danger"></span>
+                    <span asp-validation-for="Toppings" class="text-danger"></span>
                 </div>
                 <div class="form-group row">
-                    <label asp-for="order.AddOns" class="col-sm-2 col-form-label"></label>
+                    <label asp-for="AddOns" class="col-sm-2 col-form-label"></label>
                     <div class="col-sm-10">
-                        @for (int i = 0; i < Model.order.AddOns.Count(); i++)
+                        @for (int i = 0; i < Model.AddOns.Count(); i++)
                         {
-                            @if (Model.order.AddOns[i].AddOnName == "Stuff Crust" && Model.order.BaseId != Model.order.Base.FirstOrDefault(x => x.BaseName == "Fresh Pan Pizza").BaseId)
+                            @if (Model.AddOns[i].AddOnName == "Stuff Crust" && Model.BaseId != Model.Base.FirstOrDefault(x => x.BaseName == "Fresh Pan Pizza").BaseId)
                             {
-                                <input class="mr-2 " type="checkbox" disabled asp-for="order.AddOns[i].Selected">
+                                <input class="mr-2 " type="checkbox" disabled asp-for="AddOns[i].Selected">
                             }
                             else
                             {
-                                <input class="mr-2 " type="checkbox" asp-for="order.AddOns[i].Selected" onchange="document.getElementById('SelectedPizzaForm').submit()">
+                                <input class="mr-2 " type="checkbox" asp-for="AddOns[i].Selected" onchange="document.getElementById('SelectedPizzaForm').submit()">
                             }
                             
-                            <label class="col-sm-2 align-text-top " asp-for="order.AddOns[i].Selected">@Model.order.AddOns[i].AddOnName</label>
+                            <label class="col-sm-2 align-text-top " asp-for="AddOns[i].Selected">@Model.AddOns[i].AddOnName</label>
                             
                         }
                     </div>
@@ -82,7 +80,7 @@
                             <button type="button" disabled class="btn btn-success placeOrder" >Place Order</button>
                         }
                     </div>
-                    <div class="col-sm-2 ">Total Cost : <span>&#163;</span>@Model.order.TotalCost</div>
+                    <div class="col-sm-2 ">Total Cost : <span>&#163;</span>@Model.TotalCost</div>
 
                 </div>
             </div>

@@ -6,7 +6,7 @@ namespace PizzaOneBox.DataAccessLayer
     public interface IPizzaRepository
     {
         Pizza GetPizza(int id);
-        decimal GetPizzaCost(SelectedPizzaViewModel model);
+        decimal GetPizzaCost(OrderedPizzaDetails model);
         IList<Pizza> GetMenuItems();
         IList<PizzaSize> GetSizeList();
         IList<AddOn> GetAddOnsList();

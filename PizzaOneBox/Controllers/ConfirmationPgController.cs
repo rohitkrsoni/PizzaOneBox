@@ -8,23 +8,30 @@ namespace PizzaOneBox.Controllers
 {
     public class ConfirmationPgController : Controller
     {
+        public static CustomerDetailsModel _customerDetails;
         [HttpGet]
-        public IActionResult Index(string orderDetails)
+        public IActionResult SaveCustomerDetails(string orderDetails)
         {
-            var customerDetails = JsonSerializer.Deserialize<CustomerDetailsModel>(orderDetails);
-            customerDetails.CustomerSelectedPizza = JsonSerializer.Deserialize<SelectedPizzaViewModel>(customerDetails.CustomerSelectedPizzaJson);
+            _customerDetails = JsonSerializer.Deserialize<CustomerDetailsModel>(orderDetails);
+            _customerDetails.OrderedPizzaDetails = 
+                JsonSerializer.Deserialize<OrderedPizzaDetails>(_customerDetails.OrderedPizzaDetailsJson);
+            return RedirectToAction("Index");
+        }
+
+        [HttpGet]
+        public IActionResult Index()
+        {
             Random r = new Random();
             ViewBag.Discount = 0;
-            customerDetails.OrderId = r.Next()%1000000; //Model "order " store all info displayed
-            if (customerDetails.CustomerSelectedPizza.order.TotalCost >= 20m)
+            _customerDetails.OrderId = r.Next()%1000000; //Model "order " store all info displayed
+            if (_customerDetails.OrderedPizzaDetails.TotalCost >= 20m)
             {
-                ViewBag.Discount = Math.Round((customerDetails.CustomerSelectedPizza.order.TotalCost * 0.15m),2);
-                customerDetails.CustomerSelectedPizza.order.TotalCost -=
-                    customerDetails.CustomerSelectedPizza.order.TotalCost * 0.15m;
-                customerDetails.CustomerSelectedPizza.order.TotalCost = Math.Round(customerDetails.CustomerSelectedPizza.order.TotalCost, 2);
+                ViewBag.Discount = Math.Round((_customerDetails.OrderedPizzaDetails.TotalCost * 0.15m),2);
+                _customerDetails.OrderedPizzaDetails.TotalCost -=
+                    _customerDetails.OrderedPizzaDetails.TotalCost * 0.15m;
+                _customerDetails.OrderedPizzaDetails.TotalCost = Math.Round(_customerDetails.OrderedPizzaDetails.TotalCost, 2);
             }
-
-            return View("ConfirmationPg",customerDetails);
+            return View("ConfirmationPg",_customerDetails);
         }
 
     }

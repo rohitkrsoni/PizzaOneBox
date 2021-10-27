@@ -13,22 +13,22 @@ namespace PizzaOneBox.DataAccessLayer
             return GetMenuItems().FirstOrDefault(pizza=>pizza.Id==id);
         }
 
-        public decimal GetPizzaCost(SelectedPizzaViewModel model)
+        public decimal GetPizzaCost(OrderedPizzaDetails orderedPizzaDetails)
         {
             decimal toppingCost = 0m;
             decimal addOnsCost = 0m;
             decimal baseCost = 0m;
-           foreach(var topping in model.order.Toppings)
+           foreach(var topping in orderedPizzaDetails.Toppings)
             {
                 if (topping.Selected) toppingCost += topping.Price;
             }
-            foreach (var addOn in model.order.AddOns)
+            foreach (var addOn in orderedPizzaDetails.AddOns)
             {
                 if (addOn.Selected) addOnsCost += addOn.AddOnPrice;
             }
-            baseCost = GetPizzaBaseList().FirstOrDefault(b => b.BaseId == model.order.BaseId).BasePrice;
-            return  model.pizza.DefaultCost +
-                    GetSizeList().FirstOrDefault(pizzaSize=>pizzaSize.size==model.order.Size).sizeCost+
+            baseCost = GetPizzaBaseList().FirstOrDefault(b => b.BaseId == orderedPizzaDetails.BaseId).BasePrice;
+            return orderedPizzaDetails.SelectedPizza.DefaultCost +
+                    GetSizeList().FirstOrDefault(pizzaSize=>pizzaSize.size== orderedPizzaDetails.Size).sizeCost+
                     baseCost+
                     toppingCost+
                     addOnsCost;

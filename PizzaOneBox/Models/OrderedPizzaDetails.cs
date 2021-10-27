@@ -2,9 +2,9 @@
 
 namespace PizzaOneBox.Models
 {
-    public class Order
-    { 
-        
+    public class OrderedPizzaDetails
+    {
+        public Pizza SelectedPizza { get; set; }
         public Size Size { get; set; }
         public decimal TotalCost { get; set; }
         public int BaseId { get; set; }

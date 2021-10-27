@@ -26,54 +26,53 @@ namespace PizzaOneBox.Controllers
         {
             _selectedPizza = _pizzaRepository.GetPizza(id);
             _totalCost = _selectedPizza.DefaultCost;
-            Order order = new Order() { AddOns = _addOns, Toppings = _toppings, Base = _base,TotalCost = _totalCost };
-            SelectedPizzaViewModel model = new SelectedPizzaViewModel { pizza = _selectedPizza, order = order };
+            OrderedPizzaDetails orderedPizzaDetails = new OrderedPizzaDetails() {SelectedPizza = _selectedPizza, AddOns = _addOns, Toppings = _toppings, Base = _base,TotalCost = _totalCost };
             ViewBag.ActivateOrderButton = false;
-            return View(model);
+            return View(orderedPizzaDetails);
         }
         [HttpPost]
-        public IActionResult SelectedPizza(SelectedPizzaViewModel model)
+        public IActionResult SelectedPizza(OrderedPizzaDetails orderedPizzaDetails)
         {
-            model.pizza = _selectedPizza;
-            for (int i = 0; i < model.order.AddOns.Count; i++)
+            orderedPizzaDetails.SelectedPizza = _selectedPizza;
+            for (int i = 0; i < orderedPizzaDetails.AddOns.Count; i++)
             {
-                _addOns[i].Selected = model.order.AddOns[i].Selected;
+                _addOns[i].Selected = orderedPizzaDetails.AddOns[i].Selected;
             }
-            for (int i = 0; i < model.order.Toppings.Count; i++)
+            for (int i = 0; i < orderedPizzaDetails.Toppings.Count; i++)
             {
-                _toppings[i].Selected = model.order.Toppings[i].Selected;
+                _toppings[i].Selected = orderedPizzaDetails.Toppings[i].Selected;
             }
-            model.order.Base = _base;
-            model.order.AddOns = _addOns;
-            model.order.Toppings = _toppings;
+            orderedPizzaDetails.Base = _base;
+            orderedPizzaDetails.AddOns = _addOns;
+            orderedPizzaDetails.Toppings = _toppings;
 
-            if (!ModelState.IsValid) return View(model);
+            if (!ModelState.IsValid) return View(orderedPizzaDetails);
             ViewBag.ActivateOrderButton = true;
-            _totalCost = _pizzaRepository.GetPizzaCost(model);
+            _totalCost = _pizzaRepository.GetPizzaCost(orderedPizzaDetails);
 
-            model.order.TotalCost = _totalCost;
-            return View(model);
+            orderedPizzaDetails.TotalCost = _totalCost;
+            return View(orderedPizzaDetails);
         }
         [HttpPost]
-        public IActionResult PlaceOrder(SelectedPizzaViewModel model)
+        public IActionResult PlaceOrder(OrderedPizzaDetails orderedPizzaDetails)
         {
-            model.pizza = _selectedPizza;
-            for (int i = 0; i < model.order.AddOns.Count; i++)
+            orderedPizzaDetails.SelectedPizza = _selectedPizza;
+            for (int i = 0; i < orderedPizzaDetails.AddOns.Count; i++)
             {
-                _addOns[i].Selected = model.order.AddOns[i].Selected;
+                _addOns[i].Selected = orderedPizzaDetails.AddOns[i].Selected;
             }
-            for (int i = 0; i < model.order.Toppings.Count; i++)
+            for (int i = 0; i < orderedPizzaDetails.Toppings.Count; i++)
             {
-                _toppings[i].Selected = model.order.Toppings[i].Selected;
+                _toppings[i].Selected = orderedPizzaDetails.Toppings[i].Selected;
             }
-            model.order.Base = _base;
-            model.order.AddOns = _addOns;
-            model.order.Toppings = _toppings;
-            model.order.TotalCost = _totalCost;
-            if (!ModelState.IsValid) return View("SelectedPizza", model);
-            string customerSelectesPizzaJson = JsonSerializer.Serialize(model);
+            orderedPizzaDetails.Base = _base;
+            orderedPizzaDetails.AddOns = _addOns;
+            orderedPizzaDetails.Toppings = _toppings;
+            orderedPizzaDetails.TotalCost = _totalCost;
+            if (!ModelState.IsValid) return View("SelectedPizza", orderedPizzaDetails);
+            string orderedPizzaDetailsJson = JsonSerializer.Serialize(orderedPizzaDetails);
 
-            return RedirectToAction("Index", "CustomerDetails", new { customizedPizzaJson= customerSelectesPizzaJson });
+            return RedirectToAction("SaveOrderedPizzaDetails", "CustomerDetails", new { orderedPizzaDetailsJson = orderedPizzaDetailsJson });
 
         }
         
