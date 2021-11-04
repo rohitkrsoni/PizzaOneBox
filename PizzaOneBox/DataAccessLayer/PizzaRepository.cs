@@ -168,7 +168,7 @@ namespace PizzaOneBox.DataAccessLayer
 
             var totalPizzaCost = _baseList.FirstOrDefault(b => b.BaseId == pizza.PizzaBaseId).BasePrice +
                                 _sizeList.FirstOrDefault(s => s.Id == pizza.PizzaSizeId).Price +
-                                toppingCost + addOnsCost;
+                                toppingCost + addOnsCost + pizza.Price;
 
             return totalPizzaCost;
         }

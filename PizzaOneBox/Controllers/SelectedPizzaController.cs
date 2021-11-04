@@ -30,11 +30,6 @@ namespace PizzaOneBox.Controllers
                 AddOns = PopulateAddOns()
             };
 
-            OrderDetail orderDetail = new OrderDetail()
-            {
-                PizzaId = id
-
-            };
             ViewBag.ActivateOrderButton = false;
             return View(selectedPizza);
         }
@@ -45,6 +40,8 @@ namespace PizzaOneBox.Controllers
         {
             if (!ModelState.IsValid)
                 return View(selectedPizza);
+
+            selectedPizza.Pizza.Price = _pizzaRepository.GetPizzaById(selectedPizza.Pizza.PizzaId).Price;
 
             selectedPizza.Toppings = PopulateToppings();
 
