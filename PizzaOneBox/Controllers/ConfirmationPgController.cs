@@ -15,12 +15,12 @@ namespace PizzaOneBox.Controllers
             Random r = new Random();
             ViewBag.Discount = 0;
             customerDetails.OrderId = r.Next()%1000000; //Model "order " store all info displayed
-            if (customerDetails.CustomerSelectedPizza.TotalCost >= 20m)
+            if (customerDetails.CustomerSelectedPizza.PizzaCost >= 20m)
             {
-                ViewBag.Discount = Math.Round((customerDetails.CustomerSelectedPizza.TotalCost * 0.15m),2);
-                customerDetails.CustomerSelectedPizza.TotalCost -=
-                    customerDetails.CustomerSelectedPizza.TotalCost * 0.15m;
-                customerDetails.CustomerSelectedPizza.TotalCost = Math.Round(customerDetails.CustomerSelectedPizza.TotalCost, 2);
+                ViewBag.Discount = Math.Round((customerDetails.CustomerSelectedPizza.PizzaCost * 0.15m),2);
+                customerDetails.CustomerSelectedPizza.PizzaCost -=
+                    customerDetails.CustomerSelectedPizza.PizzaCost * 0.15m;
+                customerDetails.CustomerSelectedPizza.PizzaCost = Math.Round(customerDetails.CustomerSelectedPizza.PizzaCost, 2);
             }
 
             return View("ConfirmationPg",customerDetails);

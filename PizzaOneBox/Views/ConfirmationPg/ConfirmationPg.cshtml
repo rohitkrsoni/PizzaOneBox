@@ -16,7 +16,7 @@
     <h5>Your order id is : </h5> <h4> @Model.OrderId </h4><br />
 
 
-    <h4>Please pay the delivery person </h4> <h5> £@Model.CustomerSelectedPizza.TotalCost</h5>
+    <h4>Please pay the delivery person </h4> <h5> £@Model.CustomerSelectedPizza.PizzaCost</h5>
     <br />
     <button type="button" class="btn btn-outline-success rounded-lg" onclick="@("window.location.href='" + @Url.Action("HomePage", "Home") + "'");">
         Order Again
