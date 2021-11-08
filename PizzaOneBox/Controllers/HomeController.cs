@@ -14,7 +14,7 @@ namespace PizzaOneBox.Controllers
         [HttpGet]
         public ActionResult HomePage()
         {
-            return View(_pizzaRepository.GetMenuItems());
+            return View(_pizzaRepository.GetPizzas());
         }
                  
        

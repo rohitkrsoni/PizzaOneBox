@@ -6,9 +6,6 @@ namespace PizzaOneBox.Models
     public class CustomerDetailsModel
     {
 
-        public string OrderedPizzaDetailsJson { get; set; }
-        public OrderedPizzaDetails OrderedPizzaDetails { get; set; }
-        public int OrderId { get; set; }
         [Required(ErrorMessage ="Please enter your name")]
         [MinLength(2,ErrorMessage ="Name length should be of minimum 2 characters")]
         [MaxLength(20,ErrorMessage ="Name length should be of maximum 20 characters")]

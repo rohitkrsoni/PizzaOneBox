@@ -8,28 +8,25 @@
 <html>
 <body>
 
-    <div>
+    <div class="bannersize">
         <img class="image-resize bannersize" asp-append-version="true" src="~/Pizza_images/pizza3.jpg" alt="banner" />
     </div>
-    <nav class="navbar navbar-light bg-light bannersize">
-        
-    </nav>
-    <br />
-    <br />
+    <br/>
+    <br/>
     <div class="container">
         <div class="row py-5  ">
             @foreach (var pizza in Model)
             {
                 <div class=" col-lg-4">
                     <div class="card md-4 shadow-lg p-3 mb-5 bg-white rounded " style="border-radius:5px; ">
-                        <img src=@pizza.PhotoPath class=" card-img-top pizzaphoto " />
+                        <img asp-append-version="true" src=@pizza.PhotoPath class=" card-img-top pizzaphoto " />
                         <div class="card-body">
                             <h4 class="card-title">@pizza.PizzaName</h4>
-                            <p class="card-text ">@pizza.PizzaDescription </p>
+                            <p class="card-text ">@pizza.Description </p>
                             <hr />
                             <div class="d-flex justify-content-between align-items-center py-3">
-                                <p> £@pizza.DefaultCost </p>
-                                <a href="/SelectedPizza/SelectedPizza/@pizza.Id" class="btn btn-primary"> Select </a>
+                                <p> £@pizza.PizzaCost </p>
+                                <a class="btn btn-primary" asp-action="SelectedPizza" asp-controller="SelectedPizza" asp-route-id="@pizza.PizzaId"> Select </a>
                             </div>
                         </div>
                     </div>

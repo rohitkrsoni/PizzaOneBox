@@ -8,13 +8,11 @@ namespace PizzaOneBox.Controllers
 {
     public class ConfirmationPgController : Controller
     {
-        public static CustomerDetailsModel _customerDetails;
+        public static Order _order;
         [HttpGet]
-        public IActionResult SaveCustomerDetails(string orderDetails)
+        public IActionResult SaveOrder(string order)
         {
-            _customerDetails = JsonSerializer.Deserialize<CustomerDetailsModel>(orderDetails);
-            _customerDetails.OrderedPizzaDetails = 
-                JsonSerializer.Deserialize<OrderedPizzaDetails>(_customerDetails.OrderedPizzaDetailsJson);
+            _order = JsonSerializer.Deserialize<Order>(order);
             return RedirectToAction("Index");
         }
 
@@ -23,15 +21,15 @@ namespace PizzaOneBox.Controllers
         {
             Random r = new Random();
             ViewBag.Discount = 0;
-            _customerDetails.OrderId = r.Next()%1000000; //Model "order " store all info displayed
-            if (_customerDetails.OrderedPizzaDetails.TotalCost >= 20m)
+            _order.OrderId = r.Next()%1000000; //Model "order " store all info displayed
+            if (_order.Pizza.PizzaCost >= 20m)
             {
-                ViewBag.Discount = Math.Round((_customerDetails.OrderedPizzaDetails.TotalCost * 0.15m),2);
-                _customerDetails.OrderedPizzaDetails.TotalCost -=
-                    _customerDetails.OrderedPizzaDetails.TotalCost * 0.15m;
-                _customerDetails.OrderedPizzaDetails.TotalCost = Math.Round(_customerDetails.OrderedPizzaDetails.TotalCost, 2);
+                ViewBag.Discount = Math.Round((_order.Pizza.PizzaCost * 0.15m),2);
+                _order.Pizza.PizzaCost -=
+                    _order.Pizza.PizzaCost * 0.15m;
+                _order.Pizza.PizzaCost = Math.Round(_order.Pizza.PizzaCost, 2);
             }
-            return View("ConfirmationPg",_customerDetails);
+            return View("ConfirmationPg",_order);
         }
 
     }

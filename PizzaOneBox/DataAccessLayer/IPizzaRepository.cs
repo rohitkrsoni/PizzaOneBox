@@ -5,14 +5,18 @@ namespace PizzaOneBox.DataAccessLayer
 {
     public interface IPizzaRepository
     {
-        Pizza GetPizza(int id);
-        decimal GetPizzaCost(OrderedPizzaDetails model);
-        IList<Pizza> GetMenuItems();
-        IList<PizzaSize> GetSizeList();
-        IList<AddOn> GetAddOnsList();
-        IList<Topping> GetToppingsList();
-        IList<PizzaBase> GetPizzaBaseList();
+        Pizza GetPizzaById(int id);
+        decimal GetPizzaCost(Pizza pizza);
+        List<PizzaSize> GetPizzaSizes();
+        PizzaSize GetSizeById(int id);
+        List<PizzaBase> GetPizzaBases();
+        List<Topping> GetAvailableToppings();
+        List<AddOn> GetAvailableAddOns();
+        public PizzaBase GetBaseById(int id);
+        public IList<Pizza> GetPizzas();
 
-       
+
+
+
     }
 }

@@ -1,4 +1,4 @@
-﻿@model OrderedPizzaDetails;
+﻿@model Pizza;
 @using Microsoft.AspNetCore.Http;
 <div class="container bg-white " style="margin: 20px; padding: 20px; border-radius: 10px;">
         
@@ -6,27 +6,27 @@
             <div class="center">
 
                 <div class="form-group row">
-                    <div class="col-sm-3"><img class=" img" asp-append-version="true" src="@Model.SelectedPizza.PhotoPath" /></div>
+                    <div class="col-sm-3"><img class=" img" asp-append-version="true" src="@Model.PhotoPath" /></div>
                     <div class="col-sm-9">
-                        <h3 class="col-sm-6 h3 pizzaTitle">@Model.SelectedPizza.PizzaName</h3>
-                        <p class="h5 col-sm-10">@Model.SelectedPizza.PizzaDescription</p>
+                        <h3 class="col-sm-6 h3 pizzaTitle">@Model.PizzaName</h3>
+                        <p class="h5 col-sm-10">@Model.Description</p>
                     </div>
                     
 
                 </div>
                 <div class="form-group row">
-                    <label asp-for="Size" class="col-sm-2 col-form-label"></label>
+                    <label asp-for="PizzaSizeId" class="col-sm-2 col-form-label">Size</label>
                     <div class="col-sm-10">
-                        <select onchange="document.getElementById('SelectedPizzaForm').submit()" asp-for="Size" class="custom-select mr-sm-2"
+                        <select onchange="document.getElementById('SelectedPizzaForm').submit()" asp-for="PizzaSizeId" class="custom-select mr-sm-2"
                                 asp-items="Html.GetEnumSelectList<Size>()">
                         </select>
                     </div>
                 </div>
 
                 <div class="form-group row">
-                    <label asp-for="BaseId" class="col-sm-2 col-form-label"></label>
+                    <label asp-for="PizzaBaseId" class="col-sm-2 col-form-label">Base</label>
                     <div class="col-sm-10">
-                        <select onchange="document.getElementById('SelectedPizzaForm').submit()" asp-for="BaseId" asp-items="@(new SelectList(Model.Base,"BaseId","BaseName"))" class="custom-select mr-sm-2 ">
+                        <select onchange="document.getElementById('SelectedPizzaForm').submit()" asp-for="PizzaBaseId" asp-items="Html.GetEnumSelectList<BaseName>()" class="custom-select mr-sm-2 ">
                             
                         </select>
 
@@ -51,7 +51,7 @@
                     <div class="col-sm-10">
                         @for (int i = 0; i < Model.AddOns.Count(); i++)
                         {
-                            @if (Model.AddOns[i].AddOnName == "Stuff Crust" && Model.BaseId != Model.Base.FirstOrDefault(x => x.BaseName == "Fresh Pan Pizza").BaseId)
+                            @if (Model.AddOns[i].AddOnName == "Stuff Crust" && Model.PizzaBaseId != (int)BaseName.FreshPanPizza)
                             {
                                 <input class="mr-2 " type="checkbox" disabled asp-for="AddOns[i].Selected">
                             }
@@ -80,7 +80,7 @@
                             <button type="button" disabled class="btn btn-success placeOrder" >Place Order</button>
                         }
                     </div>
-                    <div class="col-sm-2 ">Total Cost : <span>&#163;</span>@Model.TotalCost</div>
+                    <div class="col-sm-2 ">Total Cost : <span>&#163;</span>@Model.PizzaCost</div>
 
                 </div>
             </div>

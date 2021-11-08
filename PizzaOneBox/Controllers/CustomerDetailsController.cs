@@ -12,11 +12,11 @@ namespace PizzaOneBox.Controllers
 {
     public class CustomerDetailsController : Controller
     {
-        private static string _selectedPizzaViewModelJson;
+        private static string _selectedPizzaJson;
         [HttpGet]
         public IActionResult SaveOrderedPizzaDetails(string orderedPizzaDetailsJson)
         {
-            _selectedPizzaViewModelJson = orderedPizzaDetailsJson;
+            _selectedPizzaJson = orderedPizzaDetailsJson;
             return RedirectToAction("Index");
         }
         [HttpGet]
@@ -27,8 +27,12 @@ namespace PizzaOneBox.Controllers
         [HttpPost]
         public IActionResult Index(CustomerDetailsModel customerDetails)
         {
-            customerDetails.OrderedPizzaDetailsJson = _selectedPizzaViewModelJson;
-            return RedirectToAction("SaveCustomerDetails", "ConfirmationPg", new { orderDetails = JsonSerializer.Serialize(customerDetails)  });
+            Order order = new Order()
+            {
+                Pizza = JsonSerializer.Deserialize<Pizza>(_selectedPizzaJson),
+                CustomerDetails = customerDetails
+            };
+            return RedirectToAction("SaveOrder", "ConfirmationPg", new { order = JsonSerializer.Serialize(order)  });
         }
        
     }

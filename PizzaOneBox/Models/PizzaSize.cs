@@ -1,15 +1,15 @@
-﻿
-namespace PizzaOneBox.Models
+﻿namespace PizzaOneBox.Models
 {
     public enum Size
     {
-        Small,
+        Small = 1,
         Medium,
         Large
     }
     public class PizzaSize
     {
-        public Size size { get; set; }
-        public decimal sizeCost { get; set; }
+        public int SizeId { get; set; }
+        public Size Size { get; set; }
+        public decimal SizeCost { get; set; }
     }
 }

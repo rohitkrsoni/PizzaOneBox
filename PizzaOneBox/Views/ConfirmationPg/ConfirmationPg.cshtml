@@ -1,4 +1,4 @@
-﻿@model PizzaOneBox.Models.CustomerDetailsModel;
+﻿@model PizzaOneBox.Models.Order;
 @*
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
@@ -7,16 +7,16 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js" integrity="sha512-GsLlZN/3F2ErC5ifS5QtgpiJtWd43JWSuIgh7mbzZ8zBps+dvLusV+eNQATqgA/HdeKFVgA5v3S/cIrLF7QnIg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
 <div class="confirmationPageLayout" id="parentDiv">
-    <h2 style="text-align:center;">Congratulations @Model.CustomerName 🎉</h2>
+    <h2 style="text-align:center;">Congratulations @Model.CustomerDetails.CustomerName 🎉</h2>
     @if (ViewBag.Discount != 0)
     {
 <h4>Congratulations you have saved £@ViewBag.Discount 🎉 </h4>
     }
-    <h5>We have received your order & it will be delivered at <br /> @Model.CustomerAddress </h5>
+    <h5>We have received your order & it will be delivered at <br /> @Model.CustomerDetails.CustomerAddress </h5>
     <h5>Your order id is : </h5> <h4> @Model.OrderId </h4><br />
 
 
-    <h4>Please pay the delivery person </h4> <h5> £@Model.OrderedPizzaDetails.TotalCost</h5>
+    <h4>Please pay the delivery person </h4> <h5> £@Model.Pizza.PizzaCost</h5>
     <br />
     <button type="button" class="btn btn-outline-success rounded-lg" onclick="@("window.location.href='" + @Url.Action("HomePage", "Home") + "'");">
         Order Again
