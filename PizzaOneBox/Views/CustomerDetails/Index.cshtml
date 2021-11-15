@@ -4,8 +4,8 @@
     ViewData["Title"] = "Contact Details";
 }
 
-<div style="margin: 10%; width: 60%;    height: 40%;    border: 3px solid #73AD21;  align-content:center;
-     padding: 10px;    border-radius: 10px;    text-align: center;    background-color: azure;">
+<div style="margin-left:19%; margin-top:10%; width: 60%;    height: 40%;    border: 3px solid #73AD21;  align-content:center;
+     padding: 10px;    border-radius: 10px;    text-align: center;    background-color: white;">
     <h4>Contact Details</h4>
     <hr />
     <div class="row">
@@ -15,7 +15,7 @@
                 <div class="form-group">
                    
                 </div>
-                <table border="0" cellspacing="10" style="margin-left:15%;" >
+                <table border="0" cellspacing="10" style="margin-left:15%;" cellpadding="10" >
                     <tr style="width:300px;">
                             <td>
                                 <label asp-for="CustomerName" class="control-label">Name:</label>
@@ -45,16 +45,23 @@
                         <td style="width:300px;"><input asp-for="CustomerAddress" class="form-control intextcentre" />
                         <span asp-validation-for="CustomerAddress" class="text-danger"></span></td>
                     </tr>
+                    <tr>
+                        <td>
+                            <button type="button" class="btn btn-outline-success rounded-lg" style="margin-left:10%;"
+                                    onclick="@("window.location.href='" + @Url.Action("HomePage", "Home") + "'");">
+                                Back to Home
+                            </button>
+                        </td>
+                        <td>
+                            
+                            <button type="submit" class="btn btn-primary" style="margin-right:auto;">Submit</button>
+                        </td>
+                    </tr>
                 </table>
                 <br />
                 <div style="text-align: center;">
 
-                    <button type="button" class="btn btn-outline-success rounded-lg" style="margin-left:10%;"
-                            onclick="@("window.location.href='" + @Url.Action("HomePage", "Home") + "'");">
-                        Back to Home
-                    </button>
                     <div class="divider" />
-                    <button type="submit" class="btn btn-primary" style="margin-right:auto;">Submit</button>
 
                 </div>
             </form> <br />

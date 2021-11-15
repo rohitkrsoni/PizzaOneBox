@@ -24,7 +24,7 @@ namespace PizzaOneBox.Controllers
             _order.OrderId = r.Next()%1000000; //Model "order " store all info displayed
             if (_order.Pizza.PizzaCost >= 20m)
             {
-                ViewBag.Discount = Math.Round((_order.Pizza.PizzaCost * 0.15m),2);
+                ViewBag.Discount = 1;
                 _order.Pizza.PizzaCost -=
                     _order.Pizza.PizzaCost * 0.15m;
                 _order.Pizza.PizzaCost = Math.Round(_order.Pizza.PizzaCost, 2);
